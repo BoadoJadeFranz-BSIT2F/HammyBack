@@ -1,0 +1,230 @@
+/* ===== Teacher Sidebar — mirrors StudentSidebar layout ===== */
+.teacher-sidebar {
+  width: 260px;
+  background: #ffffff;
+  height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #e5e7eb;
+  position: fixed;
+  left: 0;
+  top: 64px;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+/* ===== Nav items ===== */
+.teacher-sidebar-nav {
+  flex: 1;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.teacher-side-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  color: #6b7280;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+}
+
+.teacher-side-item:hover {
+  background: #f9fafb;
+  color: #1f2937;
+}
+
+.teacher-side-item.active {
+  background: linear-gradient(135deg, #1e5a3a 0%, #2d7a4f 100%);
+  color: white;
+  border-left: 3px solid #164229;
+  border-radius: 12px;
+  margin: 0 10px;
+}
+
+.teacher-side-icon {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.teacher-side-text {
+  flex: 1;
+}
+
+/* ===== Classes section ===== */
+.teacher-classes-section {
+  padding: 15px 20px;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.teacher-classes-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.teacher-classes-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.teacher-quick-add {
+  background: none;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.teacher-quick-add:hover {
+  background: #1e5a3a;
+  color: white;
+  border-color: #1e5a3a;
+}
+
+.teacher-classes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.teacher-class-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: #f9fafb;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.teacher-class-item:hover {
+  background: #f0fdf4;
+  transform: translateX(2px);
+}
+
+.teacher-class-icon {
+  font-size: 20px;
+}
+
+.teacher-class-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.teacher-class-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1f2937;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.teacher-class-section {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.teacher-loading-text,
+.teacher-empty-classes {
+  text-align: center;
+  font-size: 13px;
+  color: #9ca3af;
+  padding: 16px 0;
+}
+
+.teacher-view-all {
+  text-align: center;
+  font-size: 12px;
+  color: #1e5a3a;
+  padding: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.teacher-view-all:hover {
+  text-decoration: underline;
+}
+
+/* ===== Footer ===== */
+.teacher-sidebar-footer {
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.teacher-footer-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  color: #6b7280;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+  text-align: left;
+}
+
+.teacher-footer-item:hover {
+  background: #f9fafb;
+  color: #1f2937;
+}
+
+.teacher-footer-icon {
+  font-size: 18px;
+}
+
+.teacher-logout-btn {
+  color: #dc2626;
+}
+
+.teacher-logout-btn:hover {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+/* ===== Scrollbar ===== */
+.teacher-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.teacher-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.teacher-sidebar::-webkit-scrollbar-thumb {
+  background: #e5e7eb;
+  border-radius: 3px;
+}
+
+.teacher-sidebar::-webkit-scrollbar-thumb:hover {
+  background: #d1d5db;
+}

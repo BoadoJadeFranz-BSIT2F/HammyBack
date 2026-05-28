@@ -1,0 +1,152 @@
+.subjects-sidebar {
+  width: 320px;
+  background: #f5f5f5;
+  padding: 20px;
+  height: calc(100vh - 140px);
+  overflow-y: auto;
+  border-right: 1px solid #e0e0e0;
+}
+
+.sidebar-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.subjects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.subject-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.subject-card.clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
+  border: 1px solid #ff6b35;
+}
+
+.subject-card.clickable:active {
+  transform: translateY(0);
+}
+
+.subject-badge {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  background: #dc2626;
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 3px 7px;
+  border-radius: 50%;
+  min-width: 20px;
+  text-align: center;
+}
+
+.subject-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.subject-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.subject-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.subject-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.subject-year {
+  font-size: 12px;
+  font-weight: 500;
+  color: #666;
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.subject-instructor {
+  font-size: 12px;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.loading-message,
+.empty-message {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.empty-hamster {
+  width: 200px;
+  height: auto;
+  margin-bottom: 10px;
+  animation: bounce 2s ease-in-out infinite;
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  border-radius: 50%;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(45, 122, 79, 0.1);
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.empty-message p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.empty-message .hint {
+  color: #2d7a4f;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.loading-message {
+  font-size: 14px;
+  font-style: italic;
+}

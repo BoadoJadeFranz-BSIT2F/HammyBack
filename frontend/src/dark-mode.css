@@ -1,0 +1,3435 @@
+/* ==========================================
+   DARK MODE STYLES
+   ========================================== */
+
+/* Base Dark Mode Styles */
+body.dark-mode html,
+html.dark-mode {
+  background: #020617 !important;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body.dark-mode,
+body.dark-mode {
+  background: #020617 !important;
+  color: #f1f5f9;
+  min-height: 100vh;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body.dark-mode #root {
+  background: #020617 !important;
+  min-height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure all main containers have dark background */
+body.dark-mode main,
+body.dark-mode .main-content,
+body.dark-mode .app-container,
+body.dark-mode .page-container,
+body.dark-mode .dashboard-container,
+body.dark-mode .dashboard-content,
+body.dark-mode .dashboard-main,
+body.dark-mode .teacher-dashboard-container,
+body.dark-mode .teacher-dashboard-main {
+  background: #0f172a !important;
+  min-height: 100vh;
+}
+
+body.dark-mode * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Enhanced Text Visibility */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+  color: #f8fafc !important;
+}
+
+body.dark-mode p,
+body.dark-mode span,
+body.dark-mode div,
+body.dark-mode label {
+  color: #e2e8f0;
+}
+
+body.dark-mode .text-secondary,
+body.dark-mode .subtitle,
+body.dark-mode .description {
+  color: #cbd5e1 !important;
+}
+
+/* ==========================================
+   NAVBAR DARK MODE
+   ========================================== */
+body.dark-mode .navbar {
+  background: #1e293b;
+  border-bottom-color: #334155;
+}
+
+body.dark-mode .navbar .brand-name {
+  color: #f8fafc;
+}
+
+body.dark-mode .navbar .brand-academy {
+  color: #cbd5e1;
+}
+
+body.dark-mode .navbar .brand-tagline {
+  color: #94a3b8;
+}
+
+body.dark-mode .user-profile {
+  background: #0f172a;
+  color: #f8fafc;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .user-profile:hover {
+  background: #1e293b;
+}
+
+body.dark-mode .user-name {
+  color: #f8fafc;
+}
+
+body.dark-mode .dropdown-icon {
+  color: #cbd5e1;
+}
+
+body.dark-mode .brand-name {
+  color: #f8fafc;
+}
+
+body.dark-mode .brand-academy {
+  background: linear-gradient(135deg, #a5b4fc 0%, #d8b4fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+body.dark-mode .brand-tagline {
+  color: #cbd5e1;
+}
+
+body.dark-mode .user-name {
+  color: #f1f5f9;
+}
+
+body.dark-mode .avatar-fallback {
+  color: #000000 !important;
+  background: linear-gradient(135deg, #a5b4fc 0%, #d8b4fe 100%) !important;
+  font-weight: 700;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .profile-avatar {
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .dropdown-avatar {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .settings-btn,
+body.dark-mode .theme-toggle-btn {
+  background: #0f172a;
+  color: #f8fafc;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+}
+
+body.dark-mode .settings-btn:hover,
+body.dark-mode .theme-toggle-btn:hover {
+  background: #1e293b;
+}
+
+body.dark-mode .dropdown-menu {
+  background: #0f172a;
+  border-color: #334155;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .dropdown-header {
+  background: linear-gradient(135deg, #0f766e 0%, #134e4a 100%);
+}
+
+body.dark-mode .dropdown-user-name {
+  color: #f8fafc;
+}
+
+body.dark-mode .dropdown-user-email {
+  color: #cbd5e1;
+}
+
+body.dark-mode .dropdown-divider {
+  background: #1e293b;
+}
+
+body.dark-mode .dropdown-item {
+  color: #e2e8f0;
+}
+
+body.dark-mode .dropdown-item:hover {
+  background: #1e293b;
+  color: #f8fafc;
+}
+
+body.dark-mode .logout-item {
+  color: #f87171;
+}
+
+body.dark-mode .logout-item:hover {
+  background: #7f1d1d;
+}
+
+/* ==========================================
+   SIDEBAR/SUBMENU DARK MODE
+   ========================================== */
+body.dark-mode .sidebar,
+body.dark-mode .submenu,
+body.dark-mode .teacher-submenu,
+body.dark-mode .teacher-submenu-secondary {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+body.dark-mode .submenu-item,
+body.dark-mode .teacher-submenu-item,
+body.dark-mode .teacher-submenu-item-secondary {
+  color: #e2e8f0;
+}
+
+body.dark-mode .submenu-item:hover,
+body.dark-mode .teacher-submenu-item:hover,
+body.dark-mode .teacher-submenu-item-secondary:hover {
+  background: #334155;
+  color: #f8fafc;
+}
+
+body.dark-mode .submenu-item.active,
+body.dark-mode .teacher-submenu-item.active,
+body.dark-mode .teacher-submenu-item-secondary.active {
+  background: #3b82f6;
+  color: white;
+}
+
+body.dark-mode .sidebar-item {
+  color: #e2e8f0;
+}
+
+body.dark-mode .sidebar-item:hover {
+  background: #334155;
+  color: #f8fafc;
+}
+
+body.dark-mode .sidebar-item.active {
+  background: #3b82f6;
+  color: white;
+}
+
+body.dark-mode .submenu-separator,
+body.dark-mode .teacher-submenu-separator,
+body.dark-mode .teacher-submenu-separator-secondary {
+  color: #475569;
+}
+
+/* Student Sidebar Dark Mode */
+body.dark-mode .student-sidebar {
+  background: #1e293b;
+  border-right-color: #334155;
+}
+
+body.dark-mode .sidebar-header {
+  border-bottom-color: #334155;
+}
+
+body.dark-mode .nav-item {
+  color: #cbd5e1;
+}
+
+body.dark-mode .nav-item:hover {
+  background: #334155;
+  color: #f8fafc;
+}
+
+body.dark-mode .nav-item.active {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border-left-color: #047857;
+}
+
+body.dark-mode .subjects-section {
+  border-top-color: #334155;
+  border-bottom-color: #334155;
+}
+
+body.dark-mode .subjects-title {
+  color: #cbd5e1;
+  font-weight: 700;
+}
+
+body.dark-mode .class-item {
+  background: #0f172a;
+  border: 1px solid #334155;
+}
+
+body.dark-mode .class-item:hover {
+  background: #334155;
+}
+
+body.dark-mode .class-name {
+  color: #f8fafc;
+  font-weight: 600;
+}
+
+body.dark-mode .class-section {
+  color: #cbd5e1;
+}
+
+body.dark-mode .view-all {
+  color: #10b981;
+}
+
+body.dark-mode .loading-text,
+body.dark-mode .empty-classes {
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+body.dark-mode .empty-tasks-message {
+  background: #0f172a;
+  border-left-color: #10b981;
+}
+
+body.dark-mode .no-tasks-text {
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+body.dark-mode .sidebar-footer {
+  border-top-color: transparent;
+  background: transparent;
+}
+
+body.dark-mode .footer-item {
+  color: #cbd5e1;
+}
+
+body.dark-mode .footer-item:hover {
+  background: #334155;
+  color: #f8fafc;
+}
+
+body.dark-mode .logout-btn {
+  color: #f87171;
+}
+
+body.dark-mode .logout-btn:hover {
+  background: #7f1d1d;
+  color: #fca5a5;
+}
+
+body.dark-mode .student-sidebar::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+body.dark-mode .student-sidebar::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+
+body.dark-mode .student-sidebar::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Subjects Sidebar Dark Mode */
+body.dark-mode .subjects-sidebar {
+  background: #0f172a;
+  border-right-color: #334155;
+}
+
+body.dark-mode .sidebar-title {
+  color: #f8fafc;
+  font-weight: 700;
+}
+
+body.dark-mode .subject-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .subject-card.clickable:hover {
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  border-color: #10b981;
+}
+
+body.dark-mode .subject-name {
+  color: #f8fafc;
+  font-weight: 600;
+}
+
+body.dark-mode .subject-year,
+body.dark-mode .subject-instructor {
+  color: #cbd5e1;
+}
+
+body.dark-mode .loading-message,
+body.dark-mode .empty-message {
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+body.dark-mode .empty-hamster {
+  background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+}
+
+body.dark-mode .empty-message .hint {
+  color: #10b981;
+}
+
+/* ==========================================
+   MODULE CONTAINER DARK MODE
+   ========================================== */
+body.dark-mode .module-container {
+  background: #020617 !important;
+}
+
+body.dark-mode .module-header h1 {
+  color: #fbbf24;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .module-description {
+  color: #e2e8f0;
+  font-weight: 500;
+}
+
+body.dark-mode .module-content {
+  background: #020617 !important;
+}
+
+/* ==========================================
+   CARDS & CONTAINERS DARK MODE
+   ========================================== */
+body.dark-mode .stat-card,
+body.dark-mode .widget-card {
+  background: #1e293b !important;
+  border: 1px solid #334155 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.dark-mode .stat-value {
+  color: #f8fafc;
+  font-weight: 700;
+}
+
+body.dark-mode .stat-label {
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+body.dark-mode .widget-header h3 {
+  color: #f8fafc;
+  font-weight: 700;
+}
+
+/* ==========================================
+   FORM ELEMENTS DARK MODE
+   ========================================== */
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+  color: #f1f5f9 !important;
+  outline-color: #3b82f6;
+}
+
+body.dark-mode input:focus,
+body.dark-mode select:focus,
+body.dark-mode textarea:focus {
+  border-color: #3b82f6 !important;
+  background: #1e293b !important;
+  outline-color: #3b82f6;
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+body.dark-mode input:disabled,
+body.dark-mode select:disabled,
+body.dark-mode textarea:disabled {
+  background: #0f172a !important;
+  color: #64748b !important;
+}
+
+/* Fix non-class-ed file list items inside .form-group (deadline submission form) */
+body.dark-mode input[type="file"] ~ div > div {
+  background: #1e293b !important;
+  border: 1px solid #334155 !important;
+  border-radius: 4px;
+}
+body.dark-mode input[type="file"] ~ div > div span {
+  color: #e2e8f0 !important;
+}
+body.dark-mode input[type="file"] ~ div > div button {
+  color: #f87171 !important;
+}
+
+/* ==========================================
+   BUTTONS DARK MODE
+   ========================================== */
+body.dark-mode button:not(.btn-primary):not(.btn-success):not(.save-journal-btn):not(.start-btn):not(.submit-grade-btn):not(.add-grade-btn) {
+  background: #334155;
+  color: #f1f5f9;
+  border-color: #475569;
+}
+
+body.dark-mode button:not(.btn-primary):not(.btn-success):not(.save-journal-btn):not(.start-btn):not(.submit-grade-btn):not(.add-grade-btn):hover {
+  background: #475569;
+}
+
+/* ==========================================
+   TABLES & LISTS DARK MODE
+   ========================================== */
+body.dark-mode table {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+body.dark-mode th {
+  background: #0f172a;
+  color: #f8fafc;
+  border-color: #334155;
+  font-weight: 600;
+}
+
+body.dark-mode td {
+  border-color: #334155;
+  color: #e2e8f0;
+}
+
+body.dark-mode tr:hover {
+  background: #334155;
+}
+
+/* ==========================================
+   POMODORO DARK MODE
+   ========================================== */
+body.dark-mode .pomodoro-container .time-input-section,
+body.dark-mode .calculator-section,
+body.dark-mode .journal-section {
+  background: rgba(15, 23, 42, 0.7) !important;
+  border: 1px solid #334155 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+body.dark-mode .time-input-group input,
+body.dark-mode .max-score-input input {
+  background: #0f172a;
+  border-color: #334155;
+  color: #f8fafc;
+  font-weight: 600;
+}
+
+body.dark-mode .time-input-group input:focus,
+body.dark-mode .max-score-input input:focus {
+  border-color: #f59e0b;
+}
+
+body.dark-mode .timer-svg circle:first-child {
+  stroke: #334155;
+}
+
+body.dark-mode .time-number {
+  color: #f8fafc;
+  background: linear-gradient(135deg, #fbbf24, #f87171);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+body.dark-mode .minutes-completed {
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+body.dark-mode .timer-info {
+  background: linear-gradient(135deg, #422006 0%, #451a03 100%);
+  border-color: #78350f;
+}
+
+body.dark-mode .timer-info p {
+  color: #fcd34d;
+  font-weight: 600;
+}
+
+/* ==========================================
+   GRADES CALCULATOR DARK MODE
+   ========================================== */
+body.dark-mode .calculator-display {
+  background: linear-gradient(135deg, #4c1d95 0%, #5b21b6 100%);
+}
+
+body.dark-mode .calculator-display *,
+body.dark-mode .display-subject,
+body.dark-mode .display-score,
+body.dark-mode .display-percentage {
+  color: #ffffff !important;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .score-display,
+body.dark-mode .percentage-display {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .subject-btn {
+  background: #1e293b;
+  border-color: #334155;
+  color: #e2e8f0;
+  font-weight: 500;
+}
+
+body.dark-mode .subject-btn:hover {
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+
+body.dark-mode .subject-btn.active {
+  background: #3b82f6;
+  color: white;
+}
+
+body.dark-mode .subject-btn.custom {
+  background: #0f172a;
+}
+
+body.dark-mode .num-btn {
+  background: #1e293b;
+  border-color: #334155;
+  color: #f8fafc;
+  font-weight: 600;
+}
+
+body.dark-mode .num-btn:hover {
+  background: #334155;
+}
+
+body.dark-mode .num-btn.clear {
+  background: #422006;
+  color: #fde047;
+  border-color: #78350f;
+  font-weight: 700;
+}
+
+body.dark-mode .num-btn.back {
+  background: #7f1d1d;
+  color: #fecaca;
+  border-color: #991b1b;
+  font-weight: 700;
+}
+
+body.dark-mode .average-display {
+  background: linear-gradient(135deg, #7c2d12 0%, #991b1b 100%);
+}
+
+body.dark-mode .average-display * {
+  color: #fef2f2 !important;
+  font-weight: 700;
+}
+
+body.dark-mode .recent-grades,
+body.dark-mode .history-section {
+  background: rgba(15, 23, 42, 0.7) !important;
+  border: 1px solid #334155 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+body.dark-mode .subject-group {
+  background: rgba(15, 23, 42, 0.6) !important;
+  border: 1px solid #334155 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+}
+
+body.dark-mode .subject-group h3,
+body.dark-mode .subject-group-title {
+  color: #fbbf24;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .grade-item {
+  background: rgba(30, 41, 59, 0.5) !important;
+  border: 1px solid #334155;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .grade-item:hover {
+  box-shadow: 0 2px 8px rgba(251, 191, 36, 0.2);
+  border-color: #fbbf24;
+}
+
+body.dark-mode .grade-item * {
+  color: #e2e8f0 !important;
+}
+
+body.dark-mode .grade-percentage {
+  color: #ffffff !important;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .subject-avg {
+  color: #fbbf24 !important;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .average-value {
+  color: #ffffff !important;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .tip-card h3,
+body.dark-mode .tip-card h4 {
+  color: #f8fafc !important;
+  font-weight: 700;
+}
+
+body.dark-mode .tip-card p,
+body.dark-mode .tip-card li {
+  color: #e2e8f0;
+  font-weight: 400;
+}
+
+body.dark-mode .history-entry p {
+  color: #e2e8f0;
+}
+
+body.dark-mode .history-entry .date,
+body.dark-mode .history-entry .timestamp {
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+/* ==========================================
+   WELLNESS DARK MODE
+   ========================================== */
+body.dark-mode .wellness-welcome {
+  background: linear-gradient(135deg, #1e3a8a 0%, #4c1d95 100%);
+  border-color: #1e40af;
+}
+
+body.dark-mode .wellness-welcome h2 {
+  color: #bfdbfe;
+  font-weight: 700;
+}
+
+body.dark-mode .wellness-welcome p {
+  color: #dbeafe;
+  font-weight: 500;
+}
+
+body.dark-mode .wellness-tab {
+  color: #94a3b8;
+  border-bottom-color: transparent;
+}
+
+body.dark-mode .wellness-tab:hover {
+  color: #3b82f6;
+}
+
+body.dark-mode .wellness-tab.active {
+  color: #3b82f6;
+}
+
+body.dark-mode .wellness-tabs {
+  border-bottom-color: #334155;
+}
+
+body.dark-mode .success-banner {
+  background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+  color: #d1fae5;
+  border-color: #059669;
+  font-weight: 600;
+}
+
+body.dark-mode .mood-button {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+body.dark-mode .mood-button.selected {
+  background: #1e3a8a;
+}
+
+body.dark-mode .mood-label {
+  color: #e2e8f0;
+  font-weight: 500;
+}
+
+body.dark-mode .journal-textarea {
+  background: #0f172a;
+  border-color: #334155;
+  color: #f1f5f9;
+}
+
+/* ==========================================
+   AUTH / SIGNUP PAGE DARK MODE ADJUSTMENTS
+   Improve contrast and text visibility on signup/login pages
+   ========================================== */
+body.dark-mode .auth-container,
+body.dark-mode .auth-form-wrapper,
+body.dark-mode .auth-layout,
+body.dark-mode .auth-left,
+body.dark-mode .auth-right {
+  background: transparent !important;
+  color: #eef2ff;
+}
+
+/* Make the form card white with dark text for readability */
+body.dark-mode .auth-form-card {
+  background: #ffffff !important;
+  color: #0b1220 !important;
+  box-shadow: 0 10px 40px rgba(2,6,23,0.08) !important;
+}
+
+body.dark-mode .brand-center .brand-tagline-center,
+body.dark-mode .brand-tagline-center,
+body.dark-mode .brand-header h1,
+body.dark-mode .welcome-section h2,
+body.dark-mode .welcome-section p,
+body.dark-mode .tagline {
+  color: #e6eef8 !important;
+}
+
+/* Tabs */
+body.dark-mode .tab {
+  color: #cbd5e1;
+  background: transparent;
+  border-bottom-color: transparent;
+}
+body.dark-mode .tab.active {
+  color: #ffffff;
+  border-bottom-color: #60a5fa;
+}
+
+/* Form labels, inputs and placeholders */
+body.dark-mode .auth-form label,
+body.dark-mode .section-label,
+body.dark-mode .form-group label {
+  color: #0b1220;
+  font-weight: 600;
+}
+
+/* Inputs inside the white form card should be dark-on-white */
+body.dark-mode .auth-form-card .auth-form input,
+body.dark-mode .auth-form-card .auth-form select,
+body.dark-mode .auth-form-card .auth-form textarea,
+body.dark-mode .auth-form-card .auth-form .password-input-wrapper input {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #0b1220 !important;
+}
+
+body.dark-mode .auth-form-card .auth-form input::placeholder,
+body.dark-mode .auth-form-card .auth-form textarea::placeholder {
+  color: #6b7280 !important;
+}
+
+/* Field errors and success */
+body.dark-mode .field-error {
+  color: #fecaca !important;
+}
+body.dark-mode .error-message {
+  background: rgba(124, 58, 237, 0.06);
+  color: #ffdcdc;
+  border: 1px solid rgba(248, 113, 113, 0.12);
+  padding: 8px 10px;
+  border-radius: 6px;
+}
+body.dark-mode .field-success {
+  color: #bbf7d0 !important;
+}
+
+/* Buttons */
+body.dark-mode .btn-submit {
+  background: linear-gradient(90deg,#10b981,#059669) !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+body.dark-mode .btn-submit:disabled {
+  opacity: 0.7;
+}
+
+/* Role selector */
+body.dark-mode .role-option {
+  background: #071023;
+  border: 1px solid #1f2a3a;
+  color: #dbeafe;
+}
+body.dark-mode .role-option.selected {
+  background: linear-gradient(135deg,#0ea5a5,#06b6d4);
+  color: #001219;
+}
+
+/* Improve contrast for dividers and small text */
+/* Make small gray instructional texts dark inside the white form */
+body.dark-mode .auth-form-card .divider span,
+body.dark-mode .auth-form-card .tagline,
+body.dark-mode .auth-form-card .brand-tagline-center,
+body.dark-mode .auth-form-card .welcome-section p,
+body.dark-mode .auth-form-card .brand-header h1,
+body.dark-mode .auth-form-card .tab {
+  color: #0b1220 !important;
+}
+
+/* Fallback for other small gray text outside the card */
+body.dark-mode .divider span,
+body.dark-mode .tagline,
+body.dark-mode .brand-tagline-center {
+  color: #9fb0c8 !important;
+}
+
+/* Ensure logos inverted earlier remain crisp */
+body.dark-mode img.brand-logo-center,
+body.dark-mode img.auth-logo {
+  filter: brightness(0) invert(1) !important;
+  opacity: 0.98;
+}
+
+
+/* Make raster logo images appear white in dark mode */
+body.dark-mode img.brand-logo,
+body.dark-mode img.brand-logo-center,
+body.dark-mode img.auth-logo,
+body.dark-mode .brand-logo img,
+body.dark-mode .brand-logo-center img,
+body.dark-mode .auth-logo img {
+  filter: brightness(0) invert(1) !important;
+}
+
+/* Make Login/Register tabs green with white text inside the white form card */
+body.dark-mode .auth-form-card .tab {
+  background: linear-gradient(90deg,#10b981,#059669) !important;
+  color: #ffffff !important;
+  border-radius: 4px;
+  padding: 12px 18px;
+}
+body.dark-mode .auth-form-card .tab.active {
+  background: linear-gradient(90deg,#059669,#047857) !important;
+  color: #ffffff !important;
+}
+
+/* Make welcome header and small texts inside the card black */
+body.dark-mode .auth-form-card .welcome-section h2,
+body.dark-mode .auth-form-card .welcome-section p {
+  color: #0b1220 !important;
+}
+
+/* Make the Google button text black inside the card */
+body.dark-mode .auth-form-card .google-login-wrapper button,
+body.dark-mode .auth-form-card .google-login-wrapper button span {
+  color: #0b1220 !important;
+}
+
+/* Force any residual gray text/icons inside the Google sign-in button to be dark */
+body.dark-mode .auth-form-card .google-login-wrapper,
+body.dark-mode .auth-form-card .google-login-wrapper * {
+  color: #0b1220 !important;
+  fill: #0b1220 !important;
+  -webkit-text-fill-color: #0b1220 !important;
+  opacity: 1 !important;
+}
+
+/* Specific fallbacks for common Google button classes */
+body.dark-mode .auth-form-card .g_id_signin,
+body.dark-mode .auth-form-card .g_id_signin * {
+  color: #0b1220 !important;
+  fill: #0b1220 !important;
+  -webkit-text-fill-color: #0b1220 !important;
+  opacity: 1 !important;
+}
+
+/* Restore Google logo colors: do not override SVG/image fills inside the Google button */
+body.dark-mode .auth-form-card .google-login-wrapper svg,
+body.dark-mode .auth-form-card .google-login-wrapper svg *,
+body.dark-mode .auth-form-card .google-login-wrapper img {
+  fill: initial !important;
+  stroke: initial !important;
+  color: initial !important;
+  -webkit-text-fill-color: initial !important;
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+/* Specific override for Google's auto-rendered button classes */
+body.dark-mode .auth-form-card .g_id_signin svg,
+body.dark-mode .auth-form-card .g_id_signin svg *,
+body.dark-mode .auth-form-card .g_id_signin img {
+  fill: initial !important;
+  stroke: initial !important;
+  color: initial !important;
+  -webkit-text-fill-color: initial !important;
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+body.dark-mode .journal-textarea:focus {
+  border-color: #93c5fd;
+}
+
+body.dark-mode .tips-intro {
+  background: #422006;
+  border-color: #78350f;
+}
+
+body.dark-mode .tips-intro p {
+  color: #fcd34d;
+  font-weight: 600;
+}
+
+body.dark-mode .encouragement-box {
+  background: linear-gradient(135deg, #4c1d95 0%, #5b21b6 100%);
+  border-color: #7c3aed;
+}
+
+body.dark-mode .encouragement-box p {
+  color: #f3e8ff;
+  font-weight: 500;
+}
+
+body.dark-mode .empty-history {
+  background: rgba(15, 23, 42, 0.6) !important;
+  border: 1px solid #334155;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+}
+
+body.dark-mode .history-intro {
+  background: #064e3b;
+  border-color: #059669;
+}
+
+body.dark-mode .history-intro p {
+  color: #a7f3d0;
+  font-weight: 600;
+}
+
+/* ==========================================
+   ANALYTICS DARK MODE
+   ========================================== */
+body.dark-mode .analytics-chart {
+  background: rgba(15, 23, 42, 0.7) !important;
+  border: 1px solid #334155 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+body.dark-mode .chart-grid line {
+  stroke: #334155;
+}
+
+body.dark-mode .chart-label {
+  fill: #cbd5e1;
+  font-weight: 500;
+}
+
+/* Additional text elements for better visibility */
+body.dark-mode .stat-value,
+body.dark-mode .metric-value,
+body.dark-mode .score-display {
+  color: #f8fafc;
+  font-weight: 700;
+}
+
+body.dark-mode .stat-label,
+body.dark-mode .metric-label {
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+/* Ensure all card/module titles are highly visible */
+body.dark-mode .card h1,
+body.dark-mode .card h2,
+body.dark-mode .card h3,
+body.dark-mode .module h1,
+body.dark-mode .module h2,
+body.dark-mode .module h3,
+body.dark-mode .widget h1,
+body.dark-mode .widget h2,
+body.dark-mode .widget h3 {
+  color: #f8fafc !important;
+  font-weight: 700;
+}
+
+/* General paragraph text in dark mode */
+body.dark-mode .card p,
+body.dark-mode .module p,
+body.dark-mode .widget p {
+  color: #e2e8f0;
+}
+
+/* ==========================================
+   TASKS & DEADLINES DARK MODE
+   ========================================== */
+body.dark-mode .deadline-card,
+body.dark-mode .teacher-files-content {
+  background: rgba(15, 23, 42, 0.7) !important;
+  border: 1px solid #334155 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+body.dark-mode .deadline-title {
+  color: #fbbf24;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .deadline-meta {
+  color: #e2e8f0;
+  font-weight: 500;
+}
+
+body.dark-mode .task-item {
+  background: rgba(15, 23, 42, 0.6) !important;
+  border: 1px solid #334155 !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+}
+
+body.dark-mode .task-status {
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+/* ==========================================
+   MODALS DARK MODE
+   ========================================== */
+body.dark-mode .modal-overlay {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+body.dark-mode .modal-content {
+  background: rgba(15, 23, 42, 0.95) !important;
+  border: 1px solid #334155 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(20px);
+}
+
+body.dark-mode .modal-header {
+  border-bottom-color: #334155;
+}
+
+body.dark-mode .modal-header h2 {
+  color: #fbbf24;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .modal-subtitle {
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+body.dark-mode .modal-label {
+  color: #e2e8f0;
+  font-weight: 500;
+}
+
+body.dark-mode .modal-description,
+body.dark-mode .modal-hint {
+  color: #cbd5e1;
+  font-weight: 400;
+}
+
+body.dark-mode .class-code-display-modal {
+  background: #0f172a;
+  border-color: #334155;
+  color: #93c5fd;
+  font-weight: 700;
+}
+
+/* ==========================================
+   COMPREHENSIVE TEXT VISIBILITY FIX
+   ========================================== */
+body.dark-mode .container,
+body.dark-mode .content,
+body.dark-mode .section,
+body.dark-mode .panel {
+  color: #e2e8f0;
+}
+
+body.dark-mode .title,
+body.dark-mode .heading {
+  color: #f8fafc;
+  font-weight: 700;
+}
+
+body.dark-mode .subtitle,
+body.dark-mode .subheading {
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+body.dark-mode .text,
+body.dark-mode .description,
+body.dark-mode .info {
+  color: #e2e8f0;
+}
+
+body.dark-mode .meta,
+body.dark-mode .hint,
+body.dark-mode .note {
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+/* Ensure all paragraph text is visible */
+body.dark-mode p:not([class]) {
+  color: #e2e8f0;
+}
+
+/* Ensure all heading text is visible */
+body.dark-mode h1:not([class]),
+body.dark-mode h2:not([class]),
+body.dark-mode h3:not([class]),
+body.dark-mode h4:not([class]),
+body.dark-mode h5:not([class]),
+body.dark-mode h6:not([class]) {
+  color: #f8fafc;
+}
+
+/* Ensure all span text is visible */
+body.dark-mode span:not([class]) {
+  color: #e2e8f0;
+}
+
+/* Ensure all div text is visible */
+body.dark-mode div:not([class]) {
+  color: #e2e8f0;
+}
+
+body.dark-mode .close-btn {
+  color: #cbd5e1;
+}
+
+body.dark-mode .close-btn:hover {
+  color: #f8fafc;
+}
+
+/* ==========================================
+   DASHBOARD HOME DARK MODE
+   ========================================== */
+body.dark-mode .dashboard-home,
+body.dark-mode .teacher-dashboard-home,
+body.dark-mode .dashboard-widgets {
+  background: #0f172a !important;
+  min-height: 100vh;
+}
+
+body.dark-mode .quick-actions {
+  background: #1e293b !important;
+  border: 1px solid #334155;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .action-btn {
+  background: #334155;
+  color: #f1f5f9;
+  font-weight: 500;
+}
+
+body.dark-mode .action-btn:hover {
+  background: #475569;
+}
+
+/* ==========================================
+   EMPTY STATES DARK MODE
+   ========================================== */
+body.dark-mode .empty-state,
+body.dark-mode .placeholder-message,
+body.dark-mode .empty-widget-message,
+body.dark-mode .empty-schedule,
+body.dark-mode .empty-deadlines,
+body.dark-mode .empty-grades,
+body.dark-mode .no-data,
+body.dark-mode .no-data-chart {
+  background: rgba(15, 23, 42, 0.6) !important;
+  border: 1px solid #334155 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  color: #fbbf24 !important;
+}
+
+body.dark-mode .empty-state h2,
+body.dark-mode .empty-state h3,
+body.dark-mode .empty-deadlines h3 {
+  color: #fbbf24 !important;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .empty-state p,
+body.dark-mode .empty-widget-message p,
+body.dark-mode .empty-schedule p,
+body.dark-mode .empty-deadlines p,
+body.dark-mode .empty-grades p,
+body.dark-mode .empty-hint,
+body.dark-mode .no-data-chart p,
+body.dark-mode .no-data-chart small {
+  color: #fbbf24 !important;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .dev-note {
+  background: #0f172a;
+  border-color: #334155;
+}
+
+body.dark-mode .dev-note strong {
+  color: #e2e8f0;
+}
+
+body.dark-mode .dev-note code {
+  background: #334155;
+  color: #fbbf24;
+}
+
+/* ==========================================
+   PROFILE PAGE DARK MODE
+   ========================================== */
+body.dark-mode .profile-container {
+  background: #1e293b;
+}
+
+body.dark-mode .profile-header {
+  background: #0f172a;
+  border: 1px solid #334155;
+}
+
+body.dark-mode .profile-header * {
+  color: #f8fafc;
+  font-weight: 600;
+}
+
+body.dark-mode .profile-section {
+  background: rgba(15, 23, 42, 0.7) !important;
+  border: 1px solid #334155 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+body.dark-mode .profile-card {
+  background: #1e5a3a;
+  color: #ffffff;
+  border: 1px solid #2d7a4f;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+}
+
+body.dark-mode .profile-card h2,
+body.dark-mode .profile-card label,
+body.dark-mode .profile-card p,
+body.dark-mode .profile-card span {
+  color: #ffffff;
+}
+
+body.dark-mode .profile-card .password-form input {
+  background: #164229;
+  border-color: #2d7a4f;
+  color: #ffffff;
+}
+
+body.dark-mode .profile-card .password-form input::placeholder {
+  color: #d1fae5;
+}
+
+body.dark-mode .profile-card .password-form input:focus {
+  background: #1e5a3a;
+  border-color: #86efac;
+}
+
+body.dark-mode .profile-card .btn-logout,
+body.dark-mode .profile-card .btn-submit {
+  color: #ffffff;
+}
+
+body.dark-mode .profile-info-item label {
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+body.dark-mode .profile-info-item span {
+  color: #f1f5f9;
+  font-weight: 600;
+}
+
+/* ==========================================
+   AUTH PAGES DARK MODE
+   ========================================== */
+body.dark-mode .auth-container {
+  background: #0f172a;
+}
+
+body.dark-mode .auth-card {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+body.dark-mode .auth-title {
+  color: #f8fafc;
+  font-weight: 700;
+}
+
+body.dark-mode .auth-subtitle {
+  color: #cbd5e1;
+}
+
+body.dark-mode .auth-link {
+  color: #60a5fa;
+}
+
+body.dark-mode .auth-link:hover {
+  color: #93c5fd;
+}
+
+/* ==========================================
+   SCROLLBAR DARK MODE
+   ========================================== */
+body.dark-mode ::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+body.dark-mode ::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 6px;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* ==========================================
+   LOADING STATES DARK MODE
+   ========================================== */
+body.dark-mode .loading-state {
+  color: #fbbf24 !important;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================
+   ERROR MESSAGES DARK MODE
+   ========================================== */
+body.dark-mode .error-message {
+  background: rgba(127, 29, 29, 0.8) !important;
+  color: #fecaca !important;
+  border: 1px solid #991b1b !important;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+}
+
+body.dark-mode .calculator-error {
+  background: #7f1d1d;
+  color: #fecaca;
+  font-weight: 500;
+}
+
+/* ==========================================
+   TEACHER MODULES DARK MODE
+   ========================================== */
+body.dark-mode .teacher-module-container {
+  background: #0f172a;
+}
+
+body.dark-mode .teacher-module-header {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+body.dark-mode .upload-btn {
+  background: #3b82f6;
+  color: white;
+}
+
+body.dark-mode .upload-btn:hover {
+  background: #2563eb;
+}
+
+body.dark-mode .submission-item {
+  background: #0f172a;
+  border-color: #334155;
+}
+
+body.dark-mode .submission-item * {
+  color: #e2e8f0;
+}
+
+body.dark-mode .student-name {
+  color: #f8fafc;
+  font-weight: 600;
+}
+
+body.dark-mode .submission-status {
+  font-weight: 600;
+}
+
+body.dark-mode .grading-form {
+  background: #1e293b;
+  border-color: #3b82f6;
+}
+
+/* ==========================================
+   LINKS & INTERACTIVE TEXT DARK MODE
+   ========================================== */
+body.dark-mode a {
+  color: #93c5fd;
+}
+
+body.dark-mode a:hover {
+  color: #bfdbfe;
+}
+
+body.dark-mode .view-all {
+  color: #34d399;
+  font-weight: 600;
+}
+
+body.dark-mode .view-all:hover {
+  color: #6ee7b7;
+}
+
+/* ==========================================
+   STRONG EMPHASIS DARK MODE
+   ========================================== */
+body.dark-mode strong,
+body.dark-mode b {
+  color: #f8fafc;
+  font-weight: 700;
+}
+
+body.dark-mode .dev-note strong {
+  color: #f8fafc;
+}
+
+/* ==========================================
+   BADGE & PILL TEXT DARK MODE
+   ========================================== */
+body.dark-mode .badge,
+body.dark-mode .pill,
+body.dark-mode .tag {
+  color: #f8fafc;
+  font-weight: 600;
+}
+
+/* ==========================================
+   FORM LABELS DARK MODE
+   ========================================== */
+body.dark-mode label,
+body.dark-mode .form-label {
+  color: #e2e8f0;
+  font-weight: 500;
+}
+
+/* ==========================================
+   DASHBOARD WIDGETS DARK MODE
+   ========================================== */
+body.dark-mode .stat-card,
+body.dark-mode .widget-card {
+  background: #1e293b !important;
+  border: 1px solid #334155 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.dark-mode .stat-value {
+  color: #f8fafc;
+  font-weight: 700;
+}
+
+body.dark-mode .stat-label {
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+body.dark-mode .widget-header h3 {
+  color: #f8fafc;
+  font-weight: 700;
+}
+
+body.dark-mode .schedule-time {
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+body.dark-mode .schedule-title {
+  color: #f1f5f9;
+  font-weight: 600;
+}
+
+body.dark-mode .progress-text {
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+body.dark-mode .task-item span {
+  color: #e2e8f0;
+}
+
+body.dark-mode .task-item span.completed {
+  color: #64748b;
+}
+
+body.dark-mode .more-items {
+  background: #0f172a;
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+body.dark-mode .view-all-btn {
+  color: #60a5fa;
+}
+
+body.dark-mode .view-all-btn:hover {
+  background: #1e3a8a;
+  color: #93c5fd;
+}
+
+body.dark-mode .deadline-item {
+  background: #064e3b;
+  border: 1px solid #065f46;
+}
+
+body.dark-mode .deadline-title {
+  color: #f8fafc;
+  font-weight: 600;
+}
+
+body.dark-mode .deadline-due {
+  color: #cbd5e1;
+}
+
+body.dark-mode .deadline-due.urgent {
+  color: #fca5a5;
+  font-weight: 700;
+}
+
+body.dark-mode .urgent-badge {
+  background: #7f1d1d;
+  color: #fecaca;
+  font-weight: 700;
+}
+
+body.dark-mode .wellness-tip {
+  background: #064e3b;
+  border: 1px solid #065f46;
+}
+
+body.dark-mode .wellness-content strong {
+  color: #f8fafc;
+}
+
+body.dark-mode .wellness-content p {
+  color: #cbd5e1;
+}
+
+body.dark-mode .progress-bar {
+  background: #334155;
+}
+
+body.dark-mode .time-dot {
+  opacity: 0.8;
+}
+
+/* ==========================================
+   SCHEDULES MODULE DARK MODE
+   ========================================== */
+body.dark-mode .schedules-container {
+  background: #0f172a;
+}
+
+body.dark-mode .schedule-header {
+  color: #f8fafc;
+  font-weight: 700;
+}
+
+body.dark-mode .schedule-day {
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+body.dark-mode .schedule-date {
+  color: #cbd5e1;
+}
+
+body.dark-mode .schedule-class-time {
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+body.dark-mode .schedule-class-name {
+  color: #f1f5f9;
+  font-weight: 600;
+}
+
+body.dark-mode .schedule-class-section {
+  color: #cbd5e1;
+}
+
+body.dark-mode .empty-schedule {
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+body.dark-mode .legend-item {
+  color: #e2e8f0;
+}
+
+/* ==========================================
+   SCHEDULES MODULE DARK MODE - COMPLETE
+   ========================================== */
+body.dark-mode .schedules-container {
+  background: #020617 !important;
+}
+
+body.dark-mode .schedule-card {
+  background: rgba(15, 23, 42, 0.7) !important;
+  border: 1px solid #334155 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(10px);
+}
+
+body.dark-mode .schedule-legend {
+  background: rgba(15, 23, 42, 0.8) !important;
+  border: 1px solid #334155 !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+}
+
+body.dark-mode .legend-box {
+  border: 1px solid #334155;
+}
+
+body.dark-mode .class-schedule-box {
+  border-color: rgba(96, 165, 250, 0.5);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.25) 0%, rgba(16, 185, 129, 0.3) 100%);
+  box-shadow: 0 1px 3px rgba(59, 130, 246, 0.2);
+}
+
+body.dark-mode .personal-schedule-box {
+  border-color: rgba(52, 211, 153, 0.4);
+  background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
+  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.2);
+}
+
+body.dark-mode .schedule-header-row {
+  background: rgba(15, 23, 42, 0.9) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+}
+
+body.dark-mode .day-header {
+  background: rgba(15, 23, 42, 0.8) !important;
+  color: #fbbf24;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  border: 1px solid #334155 !important;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .time-header {
+  color: #e2e8f0;
+  font-weight: 700;
+}
+
+body.dark-mode .time-cell {
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+body.dark-mode .schedule-cell {
+  background: rgba(15, 23, 42, 0.5) !important;
+  border: 1px solid #334155 !important;
+}
+
+body.dark-mode .schedule-cell:hover {
+  border-color: #fbbf24 !important;
+  box-shadow: 0 2px 6px rgba(251, 191, 36, 0.3);
+  background: rgba(15, 23, 42, 0.7) !important;
+}
+
+body.dark-mode .class-block {
+  color: #d1fae5;
+  font-weight: 600;
+}
+
+body.dark-mode .class-name {
+  color: #f8fafc;
+  font-weight: 700;
+}
+
+body.dark-mode .class-section {
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+body.dark-mode .class-room {
+  color: #cbd5e1;
+}
+
+body.dark-mode .empty-schedule-message {
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+body.dark-mode .schedule-modal {
+  background: rgba(15, 23, 42, 0.95) !important;
+  border: 1px solid #334155 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(20px);
+}
+
+body.dark-mode .modal-input-group label {
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+body.dark-mode .schedule-type-selector {
+  background: #0f172a;
+  border-color: #334155;
+}
+
+body.dark-mode .type-option {
+  background: #1e293b;
+  border-color: #334155;
+  color: #cbd5e1;
+}
+
+body.dark-mode .type-option.selected {
+  background: #3b82f6;
+  border-color: #2563eb;
+  color: white;
+}
+
+body.dark-mode .type-option:hover:not(.selected) {
+  background: #334155;
+  border-color: #475569;
+}
+
+body.dark-mode .day-selector {
+  background: #0f172a;
+  border-color: #334155;
+}
+
+body.dark-mode .day-option {
+  background: #1e293b;
+  border-color: #334155;
+  color: #cbd5e1;
+}
+
+body.dark-mode .day-option.selected {
+  background: #047857;
+  border-color: #059669;
+  color: white;
+}
+
+body.dark-mode .day-option:hover:not(.selected) {
+  background: #334155;
+  border-color: #475569;
+}
+
+body.dark-mode .schedule-time-inputs {
+  background: #0f172a;
+  border-color: #334155;
+}
+
+body.dark-mode .time-separator {
+  color: #cbd5e1;
+}
+
+body.dark-mode .edit-schedule-btn,
+body.dark-mode .delete-schedule-btn {
+  background: #334155;
+  color: #e2e8f0;
+}
+
+body.dark-mode .edit-schedule-btn:hover {
+  background: #475569;
+}
+
+body.dark-mode .delete-schedule-btn {
+  background: #7f1d1d;
+  color: #fca5a5;
+}
+
+body.dark-mode .delete-schedule-btn:hover {
+  background: #991b1b;
+}
+
+/* ==========================================
+   WELCOME BANNER DARK MODE
+   ========================================== */
+body.dark-mode .welcome-banner {
+  background: #1e293b;
+  border-bottom-color: #334155;
+}
+
+body.dark-mode .welcome-title {
+  color: #f8fafc;
+  font-weight: 700;
+}
+
+body.dark-mode .welcome-message {
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+body.dark-mode .dashboard-bg-icon {
+  color: #334155;
+  opacity: 0.15;
+}
+
+body.dark-mode .profile-box {
+  background: #10b981;
+}
+
+body.dark-mode .profile-fallback {
+  background: #10b981;
+}
+
+/* ==========================================
+   JOIN CLASS DARK MODE
+   ========================================== */
+body.dark-mode .join-class-container {
+  background: #0f172a;
+}
+
+body.dark-mode .join-section {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+body.dark-mode .join-title {
+  color: #f8fafc;
+  font-weight: 800;
+}
+
+body.dark-mode .enter-code-text {
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+body.dark-mode .class-details h3 {
+  color: #f8fafc;
+  font-weight: 600;
+}
+
+body.dark-mode .class-details p {
+  color: #e2e8f0;
+}
+
+body.dark-mode .success-message-join {
+  background: #064e3b;
+  color: #a7f3d0;
+  border-color: #065f46;
+  font-weight: 600;
+}
+
+body.dark-mode .error-message-join {
+  background: #7f1d1d;
+  color: #fecaca;
+  border-color: #991b1b;
+  font-weight: 600;
+}
+
+body.dark-mode .speech-bubble {
+  background: #1e293b;
+  border-color: #fbbf24;
+  box-shadow: 0 4px 16px rgba(251, 191, 36, 0.3);
+}
+
+body.dark-mode .speech-bubble::before {
+  border-right-color: #fbbf24;
+}
+
+body.dark-mode .bubble-text {
+  color: #f8fafc;
+  font-weight: 700;
+}
+
+body.dark-mode .highlight {
+  color: #22d3ee;
+  text-decoration: none;
+}
+
+body.dark-mode .class-code-input {
+  background: #0f172a;
+  border-color: #334155;
+  color: #f8fafc;
+}
+
+body.dark-mode .class-code-input::placeholder {
+  color: #64748b;
+}
+
+body.dark-mode .class-code-input:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+body.dark-mode .join-title {
+  color: #f8fafc;
+  font-weight: 800;
+}
+
+body.dark-mode .enter-code-text {
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+body.dark-mode .join-instructions p {
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+body.dark-mode .join-instructions li {
+  color: #cbd5e1;
+}
+
+body.dark-mode .btn-join {
+  background: #10b981;
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+body.dark-mode .btn-join:hover:not(:disabled) {
+  background: #059669;
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+}
+
+body.dark-mode .btn-join:disabled {
+  background: #334155;
+  opacity: 0.6;
+}
+
+body.dark-mode .message.success {
+  background: #064e3b;
+  color: #a7f3d0;
+  border-color: #065f46;
+  font-weight: 600;
+}
+
+body.dark-mode .message.error {
+  background: #7f1d1d;
+  color: #fecaca;
+  border-color: #991b1b;
+  font-weight: 600;
+}
+
+/* ==========================================
+   CLASS DETAIL DARK MODE
+   ========================================== */
+body.dark-mode .class-detail-container {
+  background: #020617 !important;
+}
+
+body.dark-mode .class-detail-header {
+  background: rgba(15, 23, 42, 0.8) !important;
+  border: 1px solid #334155 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+body.dark-mode .class-detail-header h2 {
+  color: #fbbf24;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .class-detail-meta {
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+body.dark-mode .class-detail-content {
+  background: rgba(15, 23, 42, 0.7) !important;
+  border: 1px solid #334155 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+body.dark-mode .class-detail-content h3 {
+  color: #fbbf24;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .class-detail-content p {
+  color: #e2e8f0;
+}
+
+body.dark-mode .class-code-display {
+  background: #0f172a;
+  border-color: #334155;
+  color: #93c5fd;
+  font-weight: 700;
+}
+
+body.dark-mode .instructor-info {
+  color: #e2e8f0;
+}
+/* ==========================================
+   TEACHER DEADLINES DARK MODE
+   ========================================== */
+body.dark-mode .stats-grid .stat-card {
+  background: #1e293b;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .stat-value {
+  color: #f1f5f9;
+}
+
+body.dark-mode .stat-label {
+  color: #94a3b8;
+}
+
+body.dark-mode .filter-btn {
+  background: #1e293b;
+  color: #94a3b8;
+  border-color: #334155;
+}
+
+body.dark-mode .filter-btn:hover {
+  background: #334155;
+  border-color: #475569;
+}
+
+body.dark-mode .filter-btn.active {
+  background: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
+
+body.dark-mode .deadline-card {
+  background: #1e293b;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .deadline-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .deadline-card.completed {
+  background: #0f172a;
+  opacity: 0.8;
+}
+
+body.dark-mode .deadline-card.overdue {
+  background: #1e293b;
+  border-left-color: #dc2626;
+}
+
+body.dark-mode .deadline-title {
+  color: #f1f5f9;
+}
+
+body.dark-mode .deadline-type-badge {
+  background: #334155;
+  color: #cbd5e1;
+}
+
+body.dark-mode .deadline-description {
+  color: #94a3b8;
+}
+
+body.dark-mode .deadline-meta {
+  color: #94a3b8;
+}
+
+body.dark-mode .due-date {
+  color: #f1f5f9;
+}
+
+body.dark-mode .due-time {
+  color: #94a3b8;
+}
+
+body.dark-mode .btn-icon {
+  background: #334155;
+}
+
+body.dark-mode .btn-icon:hover {
+  background: #475569;
+}
+
+body.dark-mode .btn-complete {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+body.dark-mode .btn-complete:hover {
+  border-color: #10b981;
+  background: #064e3b;
+}
+
+body.dark-mode .empty-state h3 {
+  color: #f1f5f9;
+}
+
+body.dark-mode .empty-state p {
+  color: #94a3b8;
+}
+
+/* ==========================================
+   STUDENT DEADLINES LIST / DETAIL VIEWS
+   ========================================== */
+body.dark-mode .filter-tabs button {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+  color: #cbd5e1 !important;
+}
+
+body.dark-mode .filter-tabs button:hover {
+  background: #334155 !important;
+  border-color: #475569 !important;
+}
+
+body.dark-mode .filter-tabs button.active {
+  background: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode .assignment-card,
+body.dark-mode .submission-card,
+body.dark-mode .file-card-mini,
+body.dark-mode .stat-card-mini {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+  color: #e2e8f0 !important;
+}
+
+body.dark-mode .assignment-card:hover,
+body.dark-mode .submission-card:hover,
+body.dark-mode .file-card-mini:hover {
+  background: #334155 !important;
+  border-color: #3b82f6 !important;
+}
+
+body.dark-mode .assignment-title,
+body.dark-mode .detail-value,
+body.dark-mode .info-value,
+body.dark-mode .submissions-section h3,
+body.dark-mode .student-name,
+body.dark-mode .file-name {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .assignment-meta,
+body.dark-mode .due-label,
+body.dark-mode .submitted-label,
+body.dark-mode .info-label,
+body.dark-mode .submission-time,
+body.dark-mode .file-count,
+body.dark-mode .file-size {
+  color: #94a3b8 !important;
+}
+
+body.dark-mode .grade-display {
+  background: rgba(30, 64, 175, 0.18) !important;
+  color: #93c5fd !important;
+}
+
+body.dark-mode .instructions-box,
+body.dark-mode .teacher-materials,
+body.dark-mode .submitted-files-view,
+body.dark-mode .submission-content,
+body.dark-mode .submission-text-box,
+body.dark-mode .submission-link-box,
+body.dark-mode .feedback-box {
+  background: #0f172a !important;
+  border-color: #334155 !important;
+}
+
+body.dark-mode .feedback-box {
+  background: rgba(30, 64, 175, 0.18) !important;
+  border-color: #3b82f6 !important;
+}
+
+body.dark-mode .feedback-box h4,
+body.dark-mode .instructions-box h4,
+body.dark-mode .attached-files h4,
+body.dark-mode .detail-section h3,
+body.dark-mode .detail-section h4,
+body.dark-mode .student-info h4,
+body.dark-mode .submission-text strong,
+body.dark-mode .submission-file strong,
+body.dark-mode .feedback-display strong {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .instructions-box p,
+body.dark-mode .submission-content p,
+body.dark-mode .feedback-box p,
+body.dark-mode .submission-text p,
+body.dark-mode .feedback-display p,
+body.dark-mode .student-info p,
+body.dark-mode .submission-date,
+body.dark-mode .status-badge.assigned,
+body.dark-mode .file-card-mini,
+body.dark-mode .empty-state,
+body.dark-mode .loading-state {
+  color: #cbd5e1 !important;
+}
+
+body.dark-mode .file-chip {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+  color: #93c5fd !important;
+}
+
+body.dark-mode .file-chip:hover {
+  background: rgba(30, 64, 175, 0.18) !important;
+  border-color: #3b82f6 !important;
+}
+
+body.dark-mode .btn-secondary,
+body.dark-mode .cancel-btn,
+body.dark-mode .cancel-grade-btn {
+  background: #334155 !important;
+  border-color: #475569 !important;
+  color: #e2e8f0 !important;
+}
+
+body.dark-mode .btn-secondary:hover:not(:disabled),
+body.dark-mode .cancel-btn:hover,
+body.dark-mode .cancel-grade-btn:hover {
+  background: #475569 !important;
+}
+
+body.dark-mode .status-badge.submitted,
+body.dark-mode .badge.submitted {
+  background: rgba(6, 95, 70, 0.35) !important;
+  color: #6ee7b7 !important;
+}
+
+body.dark-mode .status-badge.graded,
+body.dark-mode .badge.graded {
+  background: rgba(30, 64, 175, 0.25) !important;
+  color: #93c5fd !important;
+}
+
+body.dark-mode .status-badge.late,
+body.dark-mode .badge.late,
+body.dark-mode .status-badge.missing,
+body.dark-mode .badge.missing {
+  background: rgba(127, 29, 29, 0.35) !important;
+  color: #fca5a5 !important;
+}
+
+/* ==========================================
+   ANALYTICS MODULE
+   ========================================== */
+body.dark-mode .analytics-main-view,
+body.dark-mode .type-card,
+body.dark-mode .class-card,
+body.dark-mode .data-point-item {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+body.dark-mode .chart-area {
+  background: #0f172a !important;
+}
+
+body.dark-mode .grid-line {
+  border-top-color: #334155 !important;
+}
+
+body.dark-mode .chart-header h3,
+body.dark-mode .chart-data-points h4,
+body.dark-mode .data-point-title,
+body.dark-mode .type-header h4,
+body.dark-mode .average-percentage,
+body.dark-mode .class-info h4,
+body.dark-mode .grade-letter,
+body.dark-mode .stat-value {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .chart-y-axis,
+body.dark-mode .chart-x-axis span,
+body.dark-mode .legend-item,
+body.dark-mode .data-point-meta,
+body.dark-mode .score-letter,
+body.dark-mode .type-count,
+body.dark-mode .average-letter,
+body.dark-mode .class-info p,
+body.dark-mode .class-count,
+body.dark-mode .stat-meta {
+  color: #94a3b8 !important;
+}
+
+body.dark-mode .score-letter {
+  background: #334155 !important;
+}
+
+body.dark-mode .type-progress {
+  background: #334155 !important;
+}
+
+/* ==========================================
+   GRADES MODULE
+   ========================================== */
+body.dark-mode .calculator-section,
+body.dark-mode .recent-grades,
+body.dark-mode .subject-group,
+body.dark-mode .grade-item {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+body.dark-mode .subject-btn,
+body.dark-mode .num-btn {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+  color: #f8fafc !important;
+}
+
+body.dark-mode .subject-btn.custom,
+body.dark-mode .max-score-input {
+  background: #0f172a !important;
+}
+
+body.dark-mode .subject-btn:hover,
+body.dark-mode .num-btn:hover {
+  background: #334155 !important;
+}
+
+body.dark-mode .custom-subject-input input,
+body.dark-mode .max-score-input input {
+  background: #1e293b !important;
+  color: #f8fafc !important;
+  border-color: #475569 !important;
+}
+
+body.dark-mode .max-score-input label,
+body.dark-mode .recent-grades h3,
+body.dark-mode .subject-name,
+body.dark-mode .grade-score,
+body.dark-mode .loading-state,
+body.dark-mode .empty-grades {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .grade-item:hover {
+  background: #334155 !important;
+}
+
+/* ==========================================
+   DASHBOARD WIDGETS / SCHEDULES
+   ========================================== */
+body.dark-mode .view-all-btn:hover {
+  background: rgba(30, 64, 175, 0.2) !important;
+}
+
+body.dark-mode .schedule-week-indicator,
+body.dark-mode .progress-percentage,
+body.dark-mode .wellness-content strong {
+  color: #34d399 !important;
+}
+
+body.dark-mode .schedules-header h1,
+body.dark-mode .modal-header h2,
+body.dark-mode .off-days-list h3,
+body.dark-mode .empty-schedule p {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .schedules-subtitle,
+body.dark-mode .schedule-footer p,
+body.dark-mode .form-group label,
+body.dark-mode .off-day-info span {
+  color: #94a3b8 !important;
+}
+
+body.dark-mode .off-days-list,
+body.dark-mode .schedule-modal {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+body.dark-mode .off-day-item {
+  background: rgba(127, 29, 29, 0.18) !important;
+  border-color: rgba(248, 113, 113, 0.4) !important;
+}
+
+body.dark-mode .off-day-info strong,
+body.dark-mode .off-day-reason,
+body.dark-mode .off-day-indicator {
+  color: #fca5a5 !important;
+}
+
+body.dark-mode .off-day-box {
+  background: rgba(127, 29, 29, 0.25) !important;
+  border-color: #ef4444 !important;
+}
+
+/* ==========================================
+   TEACHER DASHBOARD HOME
+   ========================================== */
+body.dark-mode .teacher-home {
+  background: #0f172a !important;
+}
+
+body.dark-mode .teacher-bg-icon {
+  color: #334155 !important;
+  opacity: 0.2 !important;
+}
+
+body.dark-mode .teacher-welcome-banner,
+body.dark-mode .teacher-stat-card-new,
+body.dark-mode .teacher-class-card-new {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+/* Teacher stat icon – use subtle tint instead of solid light bg (matches student pattern) */
+body.dark-mode .teacher-stat-icon-new {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Teacher class card body elements */
+body.dark-mode .teacher-card-body {
+  background: #1e293b !important;
+}
+body.dark-mode .teacher-card-meta-label {
+  color: #94a3b8 !important;
+}
+body.dark-mode .teacher-card-meta-value {
+  color: #f1f5f9 !important;
+}
+body.dark-mode .teacher-card-footer {
+  background: #1e293b !important;
+  border-top-color: #334155 !important;
+}
+body.dark-mode .teacher-card-open-btn {
+  color: #34d399 !important;
+}
+body.dark-mode .teacher-card-open-btn:hover {
+  background: rgba(52, 211, 153, 0.12) !important;
+}
+body.dark-mode .teacher-card-delete-btn {
+  color: #f87171 !important;
+}
+body.dark-mode .teacher-copy-btn {
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+body.dark-mode .teacher-classes-heading {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .teacher-welcome-title,
+body.dark-mode .teacher-stat-value,
+body.dark-mode .teacher-classes-heading {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .teacher-welcome-message,
+body.dark-mode .teacher-stat-label,
+body.dark-mode .teacher-loading-state,
+body.dark-mode .teacher-empty-state {
+  color: #94a3b8 !important;
+}
+
+body.dark-mode .teacher-info-banner {
+  background: linear-gradient(135deg, #064e3b 0%, #065f46 100%) !important;
+  border-left-color: #10b981 !important;
+  color: #a7f3d0 !important;
+}
+
+/* ==========================================
+   TEACHER TASKS / SUBMISSIONS
+   ========================================== */
+body.dark-mode .task-card,
+body.dark-mode .submission-item,
+body.dark-mode .grading-form,
+body.dark-mode .graded-info,
+body.dark-mode .stat-item {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+body.dark-mode .task-card-title,
+body.dark-mode .stat-item .stat-value,
+body.dark-mode .student-info h4,
+body.dark-mode .grade-score {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .task-description,
+body.dark-mode .meta-item,
+body.dark-mode .stat-item .stat-label,
+body.dark-mode .student-info p,
+body.dark-mode .submission-date,
+body.dark-mode .grade-percentage,
+body.dark-mode .feedback-display p,
+body.dark-mode .no-submissions {
+  color: #94a3b8 !important;
+}
+
+body.dark-mode .task-footer,
+body.dark-mode .submission-header {
+  border-top-color: #334155 !important;
+  border-bottom-color: #334155 !important;
+}
+
+body.dark-mode .view-submissions-btn {
+  background: #334155 !important;
+  border-color: #475569 !important;
+  color: #e2e8f0 !important;
+}
+
+body.dark-mode .view-submissions-btn:hover {
+  background: #475569 !important;
+}
+
+body.dark-mode .edit-grade-btn {
+  background: #1e293b !important;
+  color: #93c5fd !important;
+  border-color: #3b82f6 !important;
+}
+
+/* ==========================================
+   TEACHER DEADLINE DETAIL / SUBMISSION VIEW
+   ========================================== */
+body.dark-mode .stat-card-mini.green {
+  background: rgba(6, 95, 70, 0.3) !important;
+}
+
+body.dark-mode .stat-card-mini.blue {
+  background: rgba(30, 64, 175, 0.2) !important;
+}
+
+body.dark-mode .stat-card-mini.red {
+  background: rgba(127, 29, 29, 0.25) !important;
+}
+
+body.dark-mode .submission-view-content,
+body.dark-mode .grading-section,
+body.dark-mode .file-card {
+  background: transparent !important;
+}
+
+body.dark-mode .detail-section {
+  border-bottom-color: #334155 !important;
+}
+
+body.dark-mode .file-card {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+body.dark-mode .file-card:hover {
+  background: #334155 !important;
+  border-color: #3b82f6 !important;
+}
+
+/* ==========================================
+   FILE DETAIL MODAL
+   ========================================== */
+body.dark-mode .file-detail-modal,
+body.dark-mode .file-detail-header,
+body.dark-mode .file-preview-large,
+body.dark-mode .file-metadata,
+body.dark-mode .comment-item {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+body.dark-mode .file-detail-header,
+body.dark-mode .comments-section {
+  border-bottom-color: #334155 !important;
+  border-top-color: #334155 !important;
+}
+
+body.dark-mode .file-detail-header h2,
+body.dark-mode .file-title-large,
+body.dark-mode .comments-title,
+body.dark-mode .comment-author {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .file-type-label,
+body.dark-mode .file-description-text,
+body.dark-mode .metadata-label,
+body.dark-mode .metadata-value,
+body.dark-mode .comments-loading,
+body.dark-mode .no-comments,
+body.dark-mode .comment-time,
+body.dark-mode .comment-text,
+body.dark-mode .btn-delete-comment {
+  color: #94a3b8 !important;
+}
+
+body.dark-mode .file-description-box,
+body.dark-mode .comment-input,
+body.dark-mode .comment-item {
+  background: #0f172a !important;
+}
+
+body.dark-mode .comment-input {
+  border-color: #334155 !important;
+  color: #f8fafc !important;
+}
+
+body.dark-mode .comment-input:focus {
+  background: #1e293b !important;
+}
+
+body.dark-mode .btn-delete-large {
+  background: #334155 !important;
+  border-color: #475569 !important;
+  color: #f87171 !important;
+}
+
+body.dark-mode .btn-delete-large:hover,
+body.dark-mode .btn-delete-comment:hover {
+  background: rgba(127, 29, 29, 0.3) !important;
+}
+
+body.dark-mode .btn-cancel-comment:hover,
+body.dark-mode .close-btn:hover {
+  background: #334155 !important;
+}
+
+body.dark-mode .file-detail-modal::-webkit-scrollbar-track {
+  background: #0f172a !important;
+}
+
+body.dark-mode .file-detail-modal::-webkit-scrollbar-thumb {
+  background: #334155 !important;
+}
+
+  /* ==========================================
+     FILE CARDS DARK MODE (Student & Teacher)
+     ========================================== */
+  body.dark-mode .file-card-classroom {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+  }
+
+  body.dark-mode .file-card-classroom:hover {
+    border-color: #10b981 !important;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2) !important;
+  }
+
+  body.dark-mode .file-card-link {
+    color: inherit !important;
+  }
+
+  body.dark-mode .file-preview {
+    background: #0f172a !important;
+  }
+
+  body.dark-mode .file-card-info {
+    background: #1e293b !important;
+  }
+
+  body.dark-mode .file-card-title {
+    color: #f1f5f9 !important;
+  }
+
+  body.dark-mode .file-card-filename {
+    color: #94a3b8 !important;
+  }
+
+  body.dark-mode .file-card-description {
+    color: #94a3b8 !important;
+  }
+
+  body.dark-mode .file-card-meta {
+    color: #64748b !important;
+    border-top-color: #334155 !important;
+  }
+
+  body.dark-mode .file-meta-size,
+  body.dark-mode .file-meta-date {
+    color: #64748b !important;
+  }
+
+  body.dark-mode .btn-delete-icon {
+    background: rgba(30, 41, 59, 0.95) !important;
+    border-color: #475569 !important;
+    color: #e2e8f0 !important;
+  }
+
+  body.dark-mode .btn-delete-icon:hover {
+    background: #334155 !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  /* ==========================================
+     SUCCESS MESSAGE DARK MODE
+     ========================================== */
+  body.dark-mode .success-message {
+    background: rgba(6, 78, 59, 0.85) !important;
+    color: #a7f3d0 !important;
+    border: 1px solid #059669 !important;
+    font-weight: 600;
+  }
+
+  /* ==========================================
+     CLASS DETAIL – TABS, INFO CARDS, BACK BTN
+     ========================================== */
+  body.dark-mode .class-detail-tabs {
+    background: #0f172a !important;
+    border-bottom-color: #334155 !important;
+  }
+
+  body.dark-mode .tab-btn {
+    color: #94a3b8 !important;
+    background: transparent !important;
+    border-color: transparent !important;
+  }
+
+  body.dark-mode .tab-btn:hover {
+    color: #10b981 !important;
+    background: rgba(16, 185, 129, 0.07) !important;
+  }
+
+  body.dark-mode .tab-btn.active {
+    color: #10b981 !important;
+    border-bottom-color: #10b981 !important;
+    background: #0f172a !important;
+  }
+
+  body.dark-mode .info-card {
+    background: #1e293b !important;
+    border-left-color: #10b981 !important;
+  }
+
+  body.dark-mode .info-card h3 {
+    color: #94a3b8 !important;
+  }
+
+  body.dark-mode .info-card p {
+    color: #f1f5f9 !important;
+  }
+
+  body.dark-mode .class-info-grid {
+    background: #0f172a !important;
+  }
+
+  body.dark-mode .back-btn {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+    color: #e2e8f0 !important;
+  }
+
+  body.dark-mode .back-btn:hover {
+    border-color: #10b981 !important;
+    color: #10b981 !important;
+    background: #0f172a !important;
+  }
+
+  body.dark-mode .files-header h2 {
+    color: #f1f5f9 !important;
+  }
+
+  body.dark-mode .files-subtitle {
+    color: #94a3b8 !important;
+  }
+
+  body.dark-mode .class-actions {
+    border-top-color: #334155 !important;
+    background: #0f172a !important;
+  }
+
+  body.dark-mode .confirm-modal {
+    background: #1e293b !important;
+    border: 1px solid #334155 !important;
+  }
+
+  /* ==========================================
+     ANALYTICS & TASKS FORM TEXT VISIBILITY FIX
+     Apply profile bar principle: dark background with bright text
+     ========================================== */
+  body.dark-mode .analytics-main-view,
+  body.dark-mode .analytics-form,
+  body.dark-mode .task-form,
+  body.dark-mode .task-container,
+  body.dark-mode .teacher-files,
+  body.dark-mode .task-view {
+    background: #1e293b !important;
+    border: 1px solid #334155 !important;
+  }
+
+  /* Ensure form inputs in Analytics and Tasks have readable text on dark backgrounds */
+  body.dark-mode .analytics-main-view input,
+  body.dark-mode .analytics-form input,
+  body.dark-mode .task-form input,
+  body.dark-mode .task-view input,
+  body.dark-mode .analytics-main-view select,
+  body.dark-mode .analytics-form select,
+  body.dark-mode .task-form select,
+  body.dark-mode .task-view select {
+    background: #0f172a !important;
+    color: #f1f5f9 !important;
+    border-color: #334155 !important;
+  }
+
+  /* Stat cards inside Analytics with bright text on dark background */
+  body.dark-mode .stat-card {
+    background: #1e293b !important;
+    border: 1px solid #334155 !important;
+    padding: 16px;
+  }
+
+  body.dark-mode .stat-card .stat-label {
+    color: #cbd5e1 !important;
+    font-weight: 600;
+  }
+
+  body.dark-mode .stat-card .stat-value {
+    color: #f8fafc !important;
+    font-weight: 700;
+  }
+
+  /* Form labels in Analytics and Tasks */
+  body.dark-mode .analytics-main-view label,
+  body.dark-mode .analytics-form label,
+  body.dark-mode .task-form label,
+  body.dark-mode .task-view label {
+    color: #e2e8f0 !important;
+    font-weight: 500;
+  }
+
+  /* Text and paragraphs in form areas */
+  body.dark-mode .analytics-main-view p,
+  body.dark-mode .analytics-form p,
+  body.dark-mode .task-form p,
+  body.dark-mode .task-view p {
+    color: #e2e8f0 !important;
+  }
+
+  /* Ensure tab text is readable in Analytics and Tasks */
+  body.dark-mode .view-selector,
+  body.dark-mode .view-selector button,
+  body.dark-mode .task-tab {
+    color: #e2e8f0 !important;
+  }
+
+  body.dark-mode .view-selector button.active,
+  body.dark-mode .task-tab.active {
+    background: #3b82f6 !important;
+    color: #ffffff !important;
+    border-color: #2563eb !important;
+  }
+
+  body.dark-mode .confirm-modal h2 {
+    color: #f1f5f9 !important;
+  }
+
+  body.dark-mode .confirm-modal p {
+    color: #cbd5e1 !important;
+  }
+
+  body.dark-mode .confirm-modal p strong {
+    color: #f1f5f9 !important;
+  }
+
+  body.dark-mode .warning-text {
+    color: #f87171 !important;
+  }
+
+  body.dark-mode .cancel-btn {
+    background: #334155 !important;
+    color: #e2e8f0 !important;
+    border-color: #475569 !important;
+  }
+
+  body.dark-mode .cancel-btn:hover:not(:disabled) {
+    background: #475569 !important;
+  }
+
+  /* ==========================================
+     CLASS SECTION CONTAINER (Teacher Files)
+     ========================================== */
+  body.dark-mode .class-section-container {
+    background: transparent !important;
+  }
+
+  body.dark-mode .section-header h2 {
+    color: #f1f5f9 !important;
+  }
+
+  body.dark-mode .section-subtitle {
+    color: #94a3b8 !important;
+  }
+
+  /* ==========================================
+     TEACHER MODULE – WELCOME & STATS
+     ========================================== */
+  body.dark-mode .teacher-module-container {
+    background: #0f172a !important;
+    border: 1px solid #334155 !important;
+  }
+
+  body.dark-mode .teacher-welcome-section h1 {
+    color: #f1f5f9 !important;
+  }
+
+  body.dark-mode .teacher-welcome-section p {
+    color: #94a3b8 !important;
+  }
+
+  body.dark-mode .teacher-stat-card {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
+    border: 1px solid #334155 !important;
+  }
+
+  body.dark-mode .stat-icon {
+    background: #0f172a !important;
+  }
+
+  body.dark-mode .stat-info h3 {
+    color: #94a3b8 !important;
+  }
+
+  body.dark-mode .stat-number {
+    color: #f1f5f9 !important;
+  }
+
+  body.dark-mode .teacher-module-header h2 {
+    color: #f1f5f9 !important;
+  }
+
+  /* ==========================================
+     TEACHER DASHBOARD – CLASS CARDS
+     ========================================== */
+  body.dark-mode .class-card {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+  }
+
+  body.dark-mode .class-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  body.dark-mode .class-card-header {
+    border-bottom-color: #334155 !important;
+  }
+
+  body.dark-mode .class-card-header h3 {
+    color: #f1f5f9 !important;
+  }
+
+  body.dark-mode .class-code {
+    background: #0f172a !important;
+    color: #34d399 !important;
+  }
+
+  body.dark-mode .class-card-body p {
+    color: #94a3b8 !important;
+  }
+
+  body.dark-mode .class-card-body strong {
+    color: #e2e8f0 !important;
+  }
+
+  body.dark-mode .class-card-footer {
+    border-top-color: #334155 !important;
+  }
+
+  body.dark-mode .info-banner-teacher {
+    background: linear-gradient(135deg, #064e3b 0%, #065f46 100%) !important;
+    border-left-color: #10b981 !important;
+  }
+
+  body.dark-mode .banner-text {
+    color: #a7f3d0 !important;
+  }
+
+  body.dark-mode .student-join-info {
+    background: #0f172a !important;
+    border-top-color: #334155 !important;
+  }
+
+  body.dark-mode .info-text {
+    color: #94a3b8 !important;
+  }
+
+  body.dark-mode .classes-header h2 {
+    color: #f1f5f9 !important;
+  }
+
+  /* ==========================================
+     TEACHER SCHEDULE (GANTT) DARK MODE
+     ========================================== */
+  body.dark-mode .gantt-calendar-nav {
+    background: #0f172a !important;
+  }
+
+  body.dark-mode .gantt-calendar-nav h3 {
+    color: #f1f5f9 !important;
+  }
+
+  body.dark-mode .gantt-legend {
+    background: #0f172a !important;
+  }
+
+  body.dark-mode .legend-info {
+    color: #34d399 !important;
+  }
+
+  body.dark-mode .gantt-calendar {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+  }
+
+  body.dark-mode .gantt-day {
+    background: #1e293b !important;
+  }
+
+  body.dark-mode .gantt-day:hover {
+    background: #334155 !important;
+  }
+
+  body.dark-mode .gantt-day-empty {
+    background: #0f172a !important;
+  }
+
+  body.dark-mode .gantt-day-today {
+    background: #422006 !important;
+  }
+
+  body.dark-mode .gantt-day-today:hover {
+    background: #451a03 !important;
+  }
+
+  body.dark-mode .gantt-day-number {
+    color: #e2e8f0 !important;
+  }
+
+  body.dark-mode .gantt-days {
+    background: #334155 !important;
+  }
+
+  body.dark-mode .schedule-item-card {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+  }
+
+  body.dark-mode .schedule-item-card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  body.dark-mode .schedule-item-title h4 {
+    color: #f1f5f9 !important;
+  }
+
+  body.dark-mode .schedule-item-type {
+    background: #334155 !important;
+    color: #94a3b8 !important;
+  }
+
+  body.dark-mode .schedule-item-dates {
+    color: #94a3b8 !important;
+  }
+
+  body.dark-mode .duration-label {
+    background: #334155 !important;
+    color: #94a3b8 !important;
+  }
+
+  body.dark-mode .schedule-list h3 {
+    color: #f1f5f9 !important;
+  }
+
+  body.dark-mode .quick-edit-duration {
+    background: #0f172a !important;
+  }
+
+  body.dark-mode .quick-edit-label {
+    color: #94a3b8 !important;
+  }
+
+  /* ==========================================
+     TASKS MODULE DARK MODE
+     ========================================== */
+  body.dark-mode .tasks-header h2 {
+    color: #f1f5f9 !important;
+  }
+
+  body.dark-mode .task-stat {
+    background: linear-gradient(135deg, #064e3b 0%, #065f46 100%) !important;
+    border: 1px solid #059669 !important;
+  }
+
+  body.dark-mode .task-stat .stat-label {
+    color: #a7f3d0 !important;
+  }
+
+  body.dark-mode .task-stat.overdue-stat {
+    background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%) !important;
+    border-color: #dc2626 !important;
+  }
+
+  body.dark-mode .task-stat.overdue-stat .stat-number {
+    color: #fca5a5 !important;
+  }
+
+  body.dark-mode .task-stat.overdue-stat .stat-label {
+    color: #fecaca !important;
+  }
+
+  body.dark-mode .stat-number {
+    color: #f1f5f9 !important;
+  }
+
+  body.dark-mode .hamster-task-display {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+  }
+
+  body.dark-mode .hamster-status-text {
+    color: #34d399 !important;
+  }
+
+  body.dark-mode .task-title {
+    color: #f1f5f9 !important;
+  }
+
+  body.dark-mode .task-item.completed .task-title {
+    color: #475569 !important;
+  }
+
+  body.dark-mode .task-meta {
+    color: #64748b !important;
+  }
+
+  body.dark-mode .add-task-form {
+    background: #0f172a !important;
+    border: 1px solid #334155 !important;
+  }
+
+  body.dark-mode .task-item.completed {
+    background: rgba(6, 78, 59, 0.3) !important;
+    border-color: #059669 !important;
+  }
+
+  body.dark-mode .task-item.deadline-overdue:not(.completed) {
+    background: rgba(127, 29, 29, 0.3) !important;
+  }
+
+  body.dark-mode .task-item.deadline-due-soon:not(.completed) {
+    background: rgba(120, 53, 15, 0.3) !important;
+  }
+
+  body.dark-mode .task-checkbox {
+    border-color: #10b981 !important;
+  }
+
+  body.dark-mode .task-checkbox:hover {
+    background: #064e3b !important;
+  }
+
+  body.dark-mode .empty-tasks {
+    color: #64748b !important;
+  }
+
+  /* ==========================================
+     STUDENT DEADLINES MODULE DARK MODE
+     ========================================== */
+  body.dark-mode .deadlines-list .deadline-item {
+    background: #1e293b !important;
+    border: 1px solid #334155 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  body.dark-mode .deadlines-list .deadline-item:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  body.dark-mode .deadlines-list .deadline-item.overdue {
+    background: rgba(127, 29, 29, 0.25) !important;
+    border-left-color: #dc2626 !important;
+    border-color: #991b1b !important;
+  }
+
+  body.dark-mode .deadlines-list .deadline-item.completed {
+    background: rgba(15, 23, 42, 0.6) !important;
+    border-color: #1e293b !important;
+    opacity: 0.7 !important;
+  }
+
+  body.dark-mode .deadlines-list .deadline-item.upcoming {
+    border-left-color: #f59e0b !important;
+  }
+
+  body.dark-mode .deadline-item-title {
+    color: #f1f5f9 !important;
+  }
+
+  body.dark-mode .deadline-item-description {
+    color: #94a3b8 !important;
+  }
+
+  body.dark-mode .deadline-item-meta {
+    color: #64748b !important;
+  }
+
+  body.dark-mode .deadline-class {
+    color: #94a3b8 !important;
+  }
+
+  body.dark-mode .deadline-due-info .due-date {
+    color: #f1f5f9 !important;
+  }
+
+  body.dark-mode .deadline-due-info .due-time {
+    color: #94a3b8 !important;
+  }
+
+  body.dark-mode .time-until {
+    color: #fbbf24 !important;
+    background: rgba(120, 53, 15, 0.4) !important;
+  }
+
+  body.dark-mode .time-until.overdue-text {
+    color: #f87171 !important;
+    background: rgba(127, 29, 29, 0.4) !important;
+  }
+
+  body.dark-mode .completed-label {
+    color: #34d399 !important;
+    background: rgba(6, 78, 59, 0.4) !important;
+  }
+
+  /* ==========================================
+     TEACHER DEADLINES MODULE – EXTRA ELEMENTS
+     ========================================== */
+  body.dark-mode .time-countdown {
+    color: #fbbf24 !important;
+  }
+
+  body.dark-mode .time-countdown.overdue-text {
+    color: #f87171 !important;
+  }
+
+  body.dark-mode .completed-badge {
+    color: #34d399 !important;
+    background: rgba(6, 78, 59, 0.4) !important;
+    border-radius: 6px;
+    padding: 3px 8px;
+  }
+
+  body.dark-mode .content-section {
+    background: transparent !important;
+  }
+
+  /* ==========================================
+     TEACHER FILES – CLASS FILE CARDS
+     ========================================== */
+  body.dark-mode .file-card {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+  }
+
+  body.dark-mode .file-title {
+    color: #f1f5f9 !important;
+  }
+
+  body.dark-mode .file-title-link {
+    color: #34d399 !important;
+  }
+
+  body.dark-mode .file-title-link:hover {
+    color: #6ee7b7 !important;
+  }
+
+  body.dark-mode .file-name {
+    color: #94a3b8 !important;
+  }
+
+  body.dark-mode .file-description {
+    color: #94a3b8 !important;
+  }
+
+  /* ==========================================
+     TEACHER STUDENTS TAB DARK MODE
+     ========================================== */
+  body.dark-mode .students-section h2,
+  body.dark-mode .students-header {
+    color: #f1f5f9 !important;
+  }
+
+  body.dark-mode .student-row,
+  body.dark-mode .students-list-item {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+  }
+
+  body.dark-mode .student-row:hover,
+  body.dark-mode .students-list-item:hover {
+    background: #334155 !important;
+  }
+
+  /* ==========================================
+     DEADLINE FILTERS (Student Deadlines)
+     ========================================== */
+  body.dark-mode .deadline-filters {
+    background: transparent !important;
+  }
+
+  body.dark-mode .deadline-filters .filter-btn {
+    background: #1e293b !important;
+    color: #94a3b8 !important;
+    border-color: #334155 !important;
+  }
+
+  body.dark-mode .deadline-filters .filter-btn:hover {
+    background: #334155 !important;
+    color: #e2e8f0 !important;
+  }
+
+  body.dark-mode .deadline-filters .filter-btn.active {
+    background: #3b82f6 !important;
+    color: white !important;
+    border-color: #3b82f6 !important;
+  }

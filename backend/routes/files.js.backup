@@ -1,0 +1,419 @@
+const express = require('express');
+const jwt = require('jsonwebtoken');
+const config = require('../config/config');
+const supabase = require('../config/supabase');
+const multer = require('multer');
+const router = express.Router();
+
+// Configure multer for file uploads (memory storage)
+const storage = multer.memoryStorage();
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 50 * 1024 * 1024, // 50MB limit
+  },
+  fileFilter: (req, file, cb) => {
+    // Allow common file types
+    const allowedTypes = [
+      'application/pdf',
+      'application/msword',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      'application/vnd.ms-powerpoint',
+      'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+      'application/vnd.ms-excel',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      'image/jpeg',
+      'image/png',
+      'image/gif',
+      'text/plain',
+      'application/zip',
+      'application/x-zip-compressed'
+    ];
+    
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Invalid file type. Allowed types: PDF, DOC, DOCX, PPT, PPTX, XLS, XLSX, images, TXT, ZIP'));
+    }
+  }
+});
+
+// Middleware to verify JWT token
+const verifyToken = (req, res, next) => {
+  const token = req.headers.authorization?.split(' ')[1];
+  
+  if (!token) {
+    return res.status(401).json({ message: 'No token provided' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, config.jwtSecret);
+    req.user = decoded;
+    next();
+  } catch (error) {
+    return res.status(401).json({ message: 'Invalid token' });
+  }
+};
+
+// ==================== TEACHER ROUTES ====================
+
+// Upload a file for a class
+router.post('/upload', verifyToken, upload.single('file'), async (req, res) => {
+  try {
+    const { classId, title, description } = req.body;
+    const file = req.file;
+
+    if (!file) {
+      return res.status(400).json({ message: 'No file provided' });
+    }
+
+    if (!classId || !title) {
+      return res.status(400).json({ message: 'Class ID and title are required' });
+    }
+
+    // Convert classId to number (BIGINT in database)
+    const classIdNum = parseInt(classId, 10);
+    if (isNaN(classIdNum)) {
+      return res.status(400).json({ message: 'Invalid class ID' });
+    }
+
+    // Create authenticated Supabase client with user's JWT token
+    const token = req.headers.authorization?.split(' ')[1];
+    const { createClient } = require('@supabase/supabase-js');
+    const userSupabase = createClient(
+      process.env.SUPABASE_URL,
+      process.env.SUPABASE_ANON_KEY,
+      {
+        global: {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      }
+    );
+
+    // Verify teacher owns the class
+    console.log('=== UPLOAD PERMISSION CHECK ===');
+    console.log('User ID from token:', req.user.id);
+    console.log('Class ID from request:', classIdNum);
+    
+    const { data: classData, error: classError } = await userSupabase
+      .from('classes')
+      .select('id, teacher_id')
+      .eq('id', classIdNum)
+      .single();
+
+    console.log('Class query result:', JSON.stringify(classData, null, 2));
+    console.log('Class query error:', classError);
+    
+    if (classError) {
+      console.error('Error fetching class:', JSON.stringify(classError, null, 2));
+      return res.status(403).json({ 
+        message: 'Class not found or error', 
+        error: classError.message 
+      });
+    }
+    
+    if (!classData) {
+      console.error('No class data found for ID:', classId);
+      return res.status(404).json({ message: 'Class not found' });
+    }
+    
+    if (classData.teacher_id !== req.user.id) {
+      console.error('Permission denied: teacher_id mismatch');
+      console.error('Class teacher_id:', classData.teacher_id);
+      console.error('Requesting user_id:', req.user.id);
+      return res.status(403).json({ message: 'You do not have permission to upload files to this class' });
+    }
+    
+    console.log('Permission check passed!');
+
+    // Upload file to Supabase Storage
+    const fileExt = file.originalname.split('.').pop();
+    const fileName = `${req.user.id}/${classIdNum}/${Date.now()}-${file.originalname}`;
+    
+    const { data: uploadData, error: uploadError } = await userSupabase.storage
+      .from('class-files')
+      .upload(fileName, file.buffer, {
+        contentType: file.mimetype,
+        upsert: false
+      });
+
+    if (uploadError) {
+      console.error('Storage upload error:', uploadError);
+      console.error('Upload error details:', JSON.stringify(uploadError, null, 2));
+      return res.status(500).json({ 
+        message: 'Failed to upload file to storage', 
+        error: uploadError.message,
+        details: uploadError.hint || uploadError.details || 'Check if storage bucket exists'
+      });
+    }
+
+    // Get public URL
+    const { data: urlData } = userSupabase.storage
+      .from('class-files')
+      .getPublicUrl(fileName);
+
+    // Save file metadata to database
+    const { data: fileRecord, error: dbError } = await userSupabase
+      .from('class_files')
+      .insert({
+        class_id: classIdNum,
+        teacher_id: req.user.id,
+        file_name: file.originalname,
+        file_url: urlData.publicUrl,
+        file_type: file.mimetype,
+        file_size: file.size,
+        title: title,
+        description: description || null
+      })
+      .select()
+      .single();
+
+    if (dbError) {
+      console.error('Database error:', dbError);
+      console.error('DB error details:', JSON.stringify(dbError, null, 2));
+      // Try to delete the uploaded file
+      await userSupabase.storage.from('class-files').remove([fileName]);
+      return res.status(500).json({ 
+        message: 'Failed to save file record to database', 
+        error: dbError.message,
+        details: dbError.hint || dbError.details || 'Check if class_files table exists'
+      });
+    }
+
+    res.status(201).json({
+      message: 'File uploaded successfully',
+      file: fileRecord
+    });
+
+  } catch (error) {
+    console.error('Error uploading file:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+// Get all files for a specific class (Teacher view)
+router.get('/class/:classId', verifyToken, async (req, res) => {
+  try {
+    const { classId } = req.params;
+
+    // Check if user is teacher of this class OR student enrolled in this class
+    const { data: classData } = await supabase
+      .from('classes')
+      .select('id, teacher_id')
+      .eq('id', classId)
+      .single();
+
+    if (!classData) {
+      return res.status(404).json({ message: 'Class not found' });
+    }
+
+    const isTeacher = classData.teacher_id === req.user.id;
+    
+    if (!isTeacher) {
+      // Check if student is enrolled
+      const { data: enrollment } = await supabase
+        .from('enrollments')
+        .select('id')
+        .eq('class_id', classId)
+        .eq('user_id', req.user.id)
+        .single();
+
+      if (!enrollment) {
+        return res.status(403).json({ message: 'Access denied' });
+      }
+    }
+
+    // Fetch files
+    const { data: files, error } = await supabase
+      .from('class_files')
+      .select('*')
+      .eq('class_id', classId)
+      .eq('is_active', true)
+      .order('upload_date', { ascending: false });
+
+    if (error) {
+      console.error('Database error fetching files:', error);
+      console.error('Fetch error details:', JSON.stringify(error, null, 2));
+      return res.status(500).json({ 
+        message: 'Failed to fetch files from database',
+        error: error.message,
+        details: error.hint || error.details || 'Check if class_files table exists'
+      });
+    }
+
+    res.json({ files: files || [] });
+
+  } catch (error) {
+    console.error('Error fetching files:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Get all files uploaded by the teacher (all classes)
+router.get('/my-uploads', verifyToken, async (req, res) => {
+  try {
+    const { data: files, error } = await supabase
+      .from('class_files')
+      .select('*')
+      .eq('teacher_id', req.user.id)
+      .eq('is_active', true)
+      .order('upload_date', { ascending: false });
+
+    if (error) {
+      console.error('Database error:', error);
+      return res.status(500).json({ message: 'Failed to fetch files' });
+    }
+
+    res.json({ files: files || [] });
+
+  } catch (error) {
+    console.error('Error fetching files:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Delete a file
+router.delete('/:fileId', verifyToken, async (req, res) => {
+  try {
+    const { fileId } = req.params;
+
+    // Get file record
+    const { data: file, error: fetchError } = await supabase
+      .from('class_files')
+      .select('*')
+      .eq('id', fileId)
+      .eq('teacher_id', req.user.id)
+      .single();
+
+    if (fetchError || !file) {
+      return res.status(404).json({ message: 'File not found or access denied' });
+    }
+
+    // Extract file path from URL
+    const urlParts = file.file_url.split('/class-files/');
+    const filePath = urlParts[1];
+
+    // Delete from storage
+    const { error: storageError } = await supabase.storage
+      .from('class-files')
+      .remove([filePath]);
+
+    if (storageError) {
+      console.error('Storage deletion error:', storageError);
+    }
+
+    // Soft delete from database
+    const { error: deleteError } = await supabase
+      .from('class_files')
+      .update({ is_active: false })
+      .eq('id', fileId);
+
+    if (deleteError) {
+      return res.status(500).json({ message: 'Failed to delete file record' });
+    }
+
+    res.json({ message: 'File deleted successfully' });
+
+  } catch (error) {
+    console.error('Error deleting file:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// ==================== STUDENT ROUTES ====================
+
+// Get all files from classes the student is enrolled in
+router.get('/my-files', verifyToken, async (req, res) => {
+  try {
+    // Get all classes the student is enrolled in
+    const { data: enrollments, error: enrollError } = await supabase
+      .from('enrollments')
+      .select('class_id')
+      .eq('user_id', req.user.id);
+
+    if (enrollError) {
+      console.error('Enrollment error:', enrollError);
+      return res.status(500).json({ message: 'Failed to fetch enrollments' });
+    }
+
+    if (!enrollments || enrollments.length === 0) {
+      return res.json({ files: [] });
+    }
+
+    const classIds = enrollments.map(e => e.class_id);
+
+    // Fetch all files from these classes
+    const { data: files, error } = await supabase
+      .from('class_files')
+      .select('*')
+      .in('class_id', classIds)
+      .eq('is_active', true)
+      .order('upload_date', { ascending: false });
+
+    if (error) {
+      console.error('Database error:', error);
+      return res.status(500).json({ message: 'Failed to fetch files' });
+    }
+
+    res.json({ files: files || [] });
+
+  } catch (error) {
+    console.error('Error fetching files:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Track file access (when student downloads/views a file)
+router.post('/track-access/:fileId', verifyToken, async (req, res) => {
+  try {
+    const { fileId } = req.params;
+
+    // Verify student has access to this file
+    const { data: file } = await supabase
+      .from('class_files')
+      .select('class_id')
+      .eq('id', fileId)
+      .single();
+
+    if (!file) {
+      return res.status(404).json({ message: 'File not found' });
+    }
+
+    const { data: enrollment } = await supabase
+      .from('enrollments')
+      .select('id')
+      .eq('class_id', file.class_id)
+      .eq('user_id', req.user.id)
+      .single();
+
+    if (!enrollment) {
+      return res.status(403).json({ message: 'Access denied' });
+    }
+
+    // Record access (upsert to prevent duplicates)
+    const { error } = await supabase
+      .from('student_file_access')
+      .upsert({
+        file_id: fileId,
+        user_id: req.user.id,
+        accessed_at: new Date().toISOString()
+      }, {
+        onConflict: 'file_id,user_id'
+      });
+
+    if (error) {
+      console.error('Access tracking error:', error);
+      // Don't fail the request if tracking fails
+    }
+
+    res.json({ message: 'Access tracked' });
+
+  } catch (error) {
+    console.error('Error tracking access:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+module.exports = router;

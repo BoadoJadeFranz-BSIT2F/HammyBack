@@ -1,0 +1,142 @@
+.logout-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.logout-modal {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+  overflow: hidden;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.logout-modal-header {
+  background: linear-gradient(135deg, #2d7a4f 0%, #1e5a3a 100%);
+  color: white;
+  padding: 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.logout-modal-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.logout-modal-body {
+  padding: 24px;
+  text-align: center;
+}
+
+.logout-modal-body p {
+  margin: 0 0 12px 0;
+  color: #1f2937;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.logout-modal-subtitle {
+  color: #6b7280;
+  font-size: 13px;
+  margin: 12px 0 0 0 !important;
+}
+
+.logout-modal-footer {
+  display: flex;
+  gap: 12px;
+  padding: 20px 24px;
+  border-top: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.logout-modal-btn {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancel-btn {
+  background: #e5e7eb;
+  color: #1f2937;
+}
+
+.cancel-btn:hover {
+  background: #d1d5db;
+}
+
+.confirm-btn {
+  background: #dc2626;
+  color: white;
+}
+
+.confirm-btn:hover {
+  background: #b91c1c;
+}
+
+/* Dark mode styles */
+body.dark-mode .logout-modal {
+  background: #1e293b;
+}
+
+body.dark-mode .logout-modal-header {
+  background: linear-gradient(135deg, #2d7a4f 0%, #1e5a3a 100%);
+}
+
+body.dark-mode .logout-modal-body p {
+  color: #e2e8f0;
+}
+
+body.dark-mode .logout-modal-subtitle {
+  color: #cbd5e1;
+}
+
+body.dark-mode .logout-modal-footer {
+  background: #0f172a;
+  border-top-color: #334155;
+}
+
+body.dark-mode .cancel-btn {
+  background: #334155;
+  color: #f1f5f9;
+}
+
+body.dark-mode .cancel-btn:hover {
+  background: #475569;
+}
