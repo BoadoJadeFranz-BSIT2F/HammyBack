@@ -1,7 +1,30 @@
 import axios from 'axios';
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-const API_URL = API_BASE.replace(/\/$/, '') + '/api';
+const getApiBase = () => {
+  const envBase = import.meta.env.VITE_API_URL?.trim();
+  if (envBase) return envBase;
+
+  if (import.meta.env.DEV) {
+    return 'http://localhost:5000';
+  }
+
+  if (typeof window !== 'undefined' && window.location?.origin) {
+    return window.location.origin;
+  }
+
+  return 'http://localhost:5000';
+};
+
+export const API_ORIGIN = getApiBase();
+export const API_URL = API_ORIGIN.replace(/\/$/, '') + '/api';
+
+export const buildAbsoluteUrl = (resourcePath) => {
+  if (!resourcePath) return '';
+  if (/^https?:\/\//i.test(resourcePath)) return resourcePath;
+
+  const origin = API_ORIGIN.replace(/\/$/, '');
+  return `${origin}${resourcePath.startsWith('/') ? resourcePath : `/${resourcePath}`}`;
+};
 
 const api = axios.create({
   baseURL: API_URL,

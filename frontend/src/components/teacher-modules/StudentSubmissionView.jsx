@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { submissionAPI } from '../../services/api';
+import { buildAbsoluteUrl, submissionAPI } from '../../services/api';
 import './TeacherModules.css';
 
 const StudentSubmissionView = ({ submission, deadline, onClose, onGraded }) => {
@@ -137,7 +137,7 @@ const StudentSubmissionView = ({ submission, deadline, onClose, onGraded }) => {
                       {submission.files.map((file) => (
                         <a
                           key={file.id}
-                          href={`http://localhost:5000${file.file_path}`}
+                          href={buildAbsoluteUrl(file.file_path)}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="file-card"

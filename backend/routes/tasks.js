@@ -1,10 +1,9 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
-const supabase = require('../config/supabase');
+const { supabase, supabaseAdmin } = require('../config/supabase');
+const { uploadFileToStorage, getStorageBucket } = require('../utils/storage');
 const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
 const nodemailer = require('nodemailer');
 const router = express.Router();
 
@@ -42,26 +41,8 @@ const stripAttachmentMarker = (description) => {
   return description.slice(0, markerIndex).trim();
 };
 
-const personalUploadsDir = path.join(__dirname, '../../uploads/personal-tasks');
-if (!fs.existsSync(personalUploadsDir)) {
-  fs.mkdirSync(personalUploadsDir, { recursive: true });
-}
-
-const uploadStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const userDir = path.join(personalUploadsDir, `user-${req.user.id}`);
-    if (!fs.existsSync(userDir)) {
-      fs.mkdirSync(userDir, { recursive: true });
-    }
-    cb(null, userDir);
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`);
-  }
-});
-
 const personalAttachmentUpload = multer({
-  storage: uploadStorage,
+  storage: multer.memoryStorage(),
   limits: { fileSize: 50 * 1024 * 1024 }
 });
 
@@ -91,10 +72,17 @@ router.post('/personal/upload', verifyToken, personalAttachmentUpload.single('fi
       return res.status(400).json({ message: 'No file uploaded' });
     }
 
-    const fileUrl = `${process.env.BACKEND_URL || 'http://localhost:5000'}/uploads/personal-tasks/user-${req.user.id}/${req.file.filename}`;
+    const bucket = getStorageBucket();
+    const objectPath = `personal-tasks/user-${req.user.id}/${Date.now()}-${req.file.originalname}`;
+    const { publicUrl } = await uploadFileToStorage(supabaseAdmin, {
+      bucket,
+      objectPath,
+      file: req.file
+    });
+
     return res.status(201).json({
       message: 'Attachment uploaded successfully',
-      fileUrl,
+      fileUrl: publicUrl,
       fileName: req.file.originalname,
       fileSize: req.file.size,
       fileType: req.file.mimetype

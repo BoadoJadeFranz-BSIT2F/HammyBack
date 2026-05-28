@@ -10,11 +10,16 @@ const router = express.Router();
 // Create uploads directory if it doesn't exist
 const uploadsDir = path.join(__dirname, '../../uploads');
 const tempDir = path.join(uploadsDir, 'temp');
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir, { recursive: true });
-}
-if (!fs.existsSync(tempDir)) {
-  fs.mkdirSync(tempDir, { recursive: true });
+
+// Vercel serverless deployments don't need local disk storage.
+// Keep the filesystem setup for local development only.
+if (!process.env.VERCEL) {
+  if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir, { recursive: true });
+  }
+  if (!fs.existsSync(tempDir)) {
+    fs.mkdirSync(tempDir, { recursive: true });
+  }
 }
 
 // Use memory storage so we can stream directly to Supabase Storage

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_URL } from '../services/api';
 import './CreateClassModal.css';
 
 const CreateClassModal = ({ onClose, onClassCreated }) => {
@@ -78,7 +79,7 @@ const CreateClassModal = ({ onClose, onClassCreated }) => {
       const token = localStorage.getItem('token');
       console.log('Creating class with schedules:', schedules);
       const response = await axios.post(
-        'http://localhost:5000/api/classes/create',
+        `${API_URL}/classes/create`,
         {
           ...formData,
           schedules: schedules.length > 0 ? schedules : []

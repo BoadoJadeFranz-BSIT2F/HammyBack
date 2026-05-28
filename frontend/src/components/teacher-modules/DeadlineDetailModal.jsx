@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { deadlineAPI } from '../../services/api';
+import { buildAbsoluteUrl, deadlineAPI } from '../../services/api';
 import StudentSubmissionView from './StudentSubmissionView';
 import { isMaterialArchived, archiveMaterial } from '../../services/archive';
 import './TeacherModules.css';
@@ -82,7 +82,7 @@ const DeadlineDetailModal = ({ deadline, onClose, onRefresh }) => {
       file_name: file.file_name,
       file_type: file.file_type,
       file_size: file.file_size,
-      file_url: `http://localhost:5000${file.file_path}`,
+      file_url: buildAbsoluteUrl(file.file_path),
       file_path: file.file_path,
       class_id: deadline.class_id,
       deadline_id: deadline.id,
@@ -151,7 +151,7 @@ const DeadlineDetailModal = ({ deadline, onClose, onRefresh }) => {
                   {deadline.files.filter((f) => !localArchivedIds.has(f.id) && !isMaterialArchived({ source_type: 'deadline_attachment', source_id: f.id })).map((file) => (
                     <div key={file.id} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                       <a
-                        href={`http://localhost:5000${file.file_path}`}
+                        href={buildAbsoluteUrl(file.file_path)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="file-chip"

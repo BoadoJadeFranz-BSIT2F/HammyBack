@@ -1,11 +1,11 @@
 ﻿import { useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import { fileAPI, deadlineAPI } from '../../services/api';
+import { API_ORIGIN, fileAPI, deadlineAPI } from '../../services/api';
 import FileDetailModal from './FileDetailModal';
 import { archiveMaterial, filterArchivedMaterials, isDeadlineArchived, onArchiveChange } from '../../services/archive';
 import './TeacherModules.css';
 
-const API_BASE = 'http://localhost:5000';
+const API_BASE = API_ORIGIN;
 
 const TeacherClassFiles = () => {
   const { classData } = useOutletContext();

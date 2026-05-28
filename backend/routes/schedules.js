@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
-const supabase = require('../config/supabase');
+const { supabase } = require('../config/supabase');
 
 const isSchemaMissingError = (error) => {
   const code = error?.code;

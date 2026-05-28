@@ -1,4 +1,4 @@
-// Vercel serverless entry that mounts the existing Express app (ESM-compatible loader)
+// Vercel serverless entry that mounts the existing Express app for all /api/* routes.
 import { createRequire } from 'module';
 import path from 'path';
 import { fileURLToPath } from 'url';

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import { deadlineAPI } from '../../services/api';
+import { API_ORIGIN, deadlineAPI } from '../../services/api';
 import DeadlineDetailModal from './DeadlineDetailModal';
 import { archiveMaterial, filterArchivedDeadlines } from '../../services/archive';
 import './TeacherModules.css';
@@ -123,7 +123,7 @@ const TeacherClassDeadlines = () => {
     try {
       const res = await deadlineAPI.getDeadline(deadline.id);
       const files = res.data?.deadline?.files || [];
-      const API_BASE = 'http://localhost:5000';
+      const API_BASE = API_ORIGIN;
       files.forEach((f) =>
         archiveMaterial({
           source_type: 'deadline_attachment',

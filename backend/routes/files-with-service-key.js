@@ -1,7 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
-const supabase = require('../config/supabase');
+const { supabase } = require('../config/supabase');
 const { createClient } = require('@supabase/supabase-js');
 const multer = require('multer');
 const router = express.Router();

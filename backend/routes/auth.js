@@ -2,7 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
-const supabase = require('../config/supabase');
+const { supabase } = require('../config/supabase');
 const router = express.Router();
 
 // Register endpoint

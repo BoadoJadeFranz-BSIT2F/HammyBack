@@ -1,31 +1,13 @@
 const express = require('express');
 const multer = require('multer');
-const path = require('path');
-const fs = require('fs').promises;
-const supabase = require('../config/supabase');
+const { supabase, supabaseAdmin } = require('../config/supabase');
+const { uploadFileToStorage, removeStorageObjectByUrl } = require('../utils/storage');
 const { verifyToken } = require('../middleware/auth');
 
 const router = express.Router();
 
-// Configure multer for submission file uploads
-const storage = multer.diskStorage({
-  destination: async (req, file, cb) => {
-    const uploadDir = path.join(__dirname, '../uploads/temp');
-    try {
-      await fs.mkdir(uploadDir, { recursive: true });
-      cb(null, uploadDir);
-    } catch (error) {
-      cb(error);
-    }
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, uniqueSuffix + '-' + file.originalname);
-  }
-});
-
 const upload = multer({
-  storage: storage,
+  storage: multer.memoryStorage(),
   limits: { fileSize: 50 * 1024 * 1024 }, // 50MB limit
 });
 
@@ -106,6 +88,7 @@ router.get('/deadline/:deadlineId', verifyToken, async (req, res) => {
 // SUBMIT/TURN IN WORK
 // ===============================================
 router.post('/submit', verifyToken, upload.array('files', 10), async (req, res) => {
+  let submission = null;
   try {
     const userId = req.userId;
     const { deadlineId, submissionText, submissionLink } = req.body;
@@ -117,12 +100,14 @@ router.post('/submit', verifyToken, upload.array('files', 10), async (req, res) 
     }
 
     // Get or create submission
-    let { data: submission, error: getError } = await supabase
+    const { data: existingSubmission, error: getError } = await supabase
       .from('submissions')
       .select('*')
       .eq('deadline_id', deadlineId)
       .eq('student_id', userId)
       .single();
+
+    submission = existingSubmission;
 
     if (getError) {
       // Create if doesn't exist
@@ -156,28 +141,21 @@ router.post('/submit', verifyToken, upload.array('files', 10), async (req, res) 
 
     // Handle file uploads
     if (req.files && req.files.length > 0) {
-      const submissionDir = path.join(
-        __dirname,
-        '../uploads/submission-files',
-        `class-${deadline.class_id}`,
-        `deadline-${deadlineId}`,
-        `student-${userId}`
-      );
-      await fs.mkdir(submissionDir, { recursive: true });
-
       const fileRecords = [];
+      const uploadedFileUrls = [];
 
       for (const file of req.files) {
-        const tempPath = file.path;
-        const finalPath = path.join(submissionDir, file.filename);
-        
-        // Move file from temp to final location
-        await fs.rename(tempPath, finalPath);
+        const objectPath = `submission-files/class-${deadline.class_id}/deadline-${deadlineId}/student-${userId}/${Date.now()}-${file.originalname}`;
+        const { publicUrl } = await uploadFileToStorage(supabaseAdmin, {
+          objectPath,
+          file
+        });
+        uploadedFileUrls.push(publicUrl);
 
         fileRecords.push({
           submission_id: submission.id,
           file_name: file.originalname,
-          file_path: `/uploads/submission-files/class-${deadline.class_id}/deadline-${deadlineId}/student-${userId}/${file.filename}`,
+          file_path: publicUrl,
           file_type: file.mimetype,
           file_size: file.size
         });
@@ -190,6 +168,13 @@ router.post('/submit', verifyToken, upload.array('files', 10), async (req, res) 
 
       if (filesError) {
         console.error('❌ Error saving files:', filesError);
+        for (const fileUrl of uploadedFileUrls) {
+          try {
+            await removeStorageObjectByUrl(supabaseAdmin, fileUrl);
+          } catch (cleanupError) {
+            console.error('Error cleaning submission file:', cleanupError.message || cleanupError);
+          }
+        }
       }
 
       console.log(`✅ Uploaded ${fileRecords.length} files`);
@@ -210,6 +195,25 @@ router.post('/submit', verifyToken, upload.array('files', 10), async (req, res) 
 
     if (updateError) {
       console.error('❌ Error updating submission:', updateError);
+      if (req.files && req.files.length > 0) {
+        const { data: createdFiles } = await supabase
+          .from('submission_files')
+          .select('file_path')
+          .eq('submission_id', submission.id);
+
+        for (const file of createdFiles || []) {
+          try {
+            await removeStorageObjectByUrl(supabaseAdmin, file.file_path);
+          } catch (cleanupError) {
+            console.error('Error cleaning submission file after update failure:', cleanupError.message || cleanupError);
+          }
+        }
+
+        await supabase
+          .from('submission_files')
+          .delete()
+          .eq('submission_id', submission.id);
+      }
       return res.status(500).json({ message: 'Error submitting work' });
     }
 
@@ -231,18 +235,24 @@ router.post('/submit', verifyToken, upload.array('files', 10), async (req, res) 
 
   } catch (error) {
     console.error('❌ Submit work error:', error);
-    
-    // Clean up uploaded files on error
-    if (req.files) {
-      for (const file of req.files) {
-        try {
-          await fs.unlink(file.path);
-        } catch (unlinkError) {
-          console.error('Error deleting file:', unlinkError);
+
+    if (req.files && req.files.length > 0) {
+      try {
+        const { data: createdFiles } = await supabase
+          .from('submission_files')
+          .select('file_path')
+          .eq('submission_id', submission?.id || null);
+
+        for (const file of createdFiles || []) {
+          try {
+            await removeStorageObjectByUrl(supabaseAdmin, file.file_path);
+          } catch (cleanupError) {
+            console.error('Error cleaning submission file after exception:', cleanupError.message || cleanupError);
+          }
         }
-      }
+      } catch (_) {}
     }
-    
+
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
@@ -504,12 +514,10 @@ router.delete('/file/:fileId', verifyToken, async (req, res) => {
       return res.status(400).json({ message: 'Cannot delete files from graded submission' });
     }
 
-    // Delete file from disk
-    const filePath = path.join(__dirname, '..', file.file_path);
     try {
-      await fs.unlink(filePath);
-    } catch (fsError) {
-      console.error('Warning: Could not delete file from disk:', fsError);
+      await removeStorageObjectByUrl(supabaseAdmin, file.file_path);
+    } catch (storageError) {
+      console.error('Warning: Could not delete file from storage:', storageError.message || storageError);
     }
 
     // Delete from database

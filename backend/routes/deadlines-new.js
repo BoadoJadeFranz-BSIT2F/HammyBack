@@ -1,31 +1,14 @@
 const express = require('express');
 const multer = require('multer');
-const path = require('path');
 const fs = require('fs').promises;
-const supabase = require('../config/supabase');
+const { supabase, supabaseAdmin } = require('../config/supabase');
+const { uploadFileToStorage, removeStorageObjectByUrl } = require('../utils/storage');
 const { verifyToken } = require('../middleware/auth');
 
 const router = express.Router();
 
-// Configure multer for file uploads
-const storage = multer.diskStorage({
-  destination: async (req, file, cb) => {
-    const uploadDir = path.join(__dirname, '../uploads/temp');
-    try {
-      await fs.mkdir(uploadDir, { recursive: true });
-      cb(null, uploadDir);
-    } catch (error) {
-      cb(error);
-    }
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, uniqueSuffix + '-' + file.originalname);
-  }
-});
-
 const upload = multer({
-  storage: storage,
+  storage: multer.memoryStorage(),
   limits: { fileSize: 50 * 1024 * 1024 }, // 50MB limit
   fileFilter: (req, file, cb) => {
     const allowedTypes = /jpeg|jpg|png|gif|pdf|doc|docx|ppt|pptx|txt|xls|xlsx|zip/;
@@ -47,7 +30,7 @@ router.post('/create', verifyToken, upload.array('files', 10), async (req, res) 
   try {
     const userId = req.userId;
     const { classId, title, instructions, type, dueDate, dueTime, points, allowLateSubmission, submissionType, postKind } = req.body;
-    const materialPaths = [];
+    const uploadedFileUrls = [];
 
     console.log('📝 Creating post:', { classId, title, type, postKind, userId });
 
@@ -73,22 +56,21 @@ router.post('/create', verifyToken, upload.array('files', 10), async (req, res) 
         return res.status(400).json({ message: 'Please choose at least one file for Files & Materials' });
       }
 
-      const classUploadDir = path.join(__dirname, '../uploads', `class-${classId}`);
-      await fs.mkdir(classUploadDir, { recursive: true });
-
       const fileRecords = [];
 
       for (const file of req.files) {
-        const tempPath = file.path;
-        const finalPath = path.join(classUploadDir, file.filename);
-        await fs.rename(tempPath, finalPath);
-        materialPaths.push(finalPath);
+        const objectPath = `class-${classId}/deadline-materials/${Date.now()}-${file.originalname}`;
+        const { publicUrl } = await uploadFileToStorage(supabaseAdmin, {
+          objectPath,
+          file
+        });
+        uploadedFileUrls.push(publicUrl);
 
         fileRecords.push({
           class_id: parseInt(classId, 10),
           teacher_id: userId,
           file_name: file.originalname,
-          file_url: `${process.env.BACKEND_URL || 'http://localhost:5000'}/uploads/class-${classId}/${file.filename}`,
+          file_url: publicUrl,
           file_type: file.mimetype,
           file_size: file.size,
           title,
@@ -103,9 +85,9 @@ router.post('/create', verifyToken, upload.array('files', 10), async (req, res) 
 
       if (filesInsertError) {
         console.error('❌ Error creating material records:', filesInsertError);
-        for (const filePath of materialPaths) {
+        for (const fileUrl of uploadedFileUrls) {
           try {
-            await fs.unlink(filePath);
+            await removeStorageObjectByUrl(supabaseAdmin, fileUrl);
           } catch (unlinkError) {
             console.error('Error cleaning material file:', unlinkError.message);
           }
@@ -158,22 +140,20 @@ router.post('/create', verifyToken, upload.array('files', 10), async (req, res) 
 
     // Handle file uploads if any
     if (req.files && req.files.length > 0) {
-      const deadlineDir = path.join(__dirname, '../uploads/deadline-files', `class-${classId}`, `deadline-${deadline.id}`);
-      await fs.mkdir(deadlineDir, { recursive: true });
-
       const fileRecords = [];
 
       for (const file of req.files) {
-        const tempPath = file.path;
-        const finalPath = path.join(deadlineDir, file.filename);
-        
-        // Move file from temp to final location
-        await fs.rename(tempPath, finalPath);
+        const objectPath = `deadline-files/class-${classId}/deadline-${deadline.id}/${Date.now()}-${file.originalname}`;
+        const { publicUrl } = await uploadFileToStorage(supabaseAdmin, {
+          objectPath,
+          file
+        });
+        uploadedFileUrls.push(publicUrl);
 
         fileRecords.push({
           deadline_id: deadline.id,
           file_name: file.originalname,
-          file_path: `/uploads/deadline-files/class-${classId}/deadline-${deadline.id}/${file.filename}`,
+          file_path: publicUrl,
           file_type: file.mimetype,
           file_size: file.size
         });
@@ -186,6 +166,13 @@ router.post('/create', verifyToken, upload.array('files', 10), async (req, res) 
 
       if (filesError) {
         console.error('❌ Error saving file records:', filesError);
+        for (const fileUrl of uploadedFileUrls) {
+          try {
+            await removeStorageObjectByUrl(supabaseAdmin, fileUrl);
+          } catch (cleanupError) {
+            console.error('Error cleaning deadline file:', cleanupError.message || cleanupError);
+          }
+        }
       } else {
         console.log(`✅ Uploaded ${fileRecords.length} files for deadline ${deadline.id}`);
       }
@@ -201,18 +188,15 @@ router.post('/create', verifyToken, upload.array('files', 10), async (req, res) 
 
   } catch (error) {
     console.error('❌ Create deadline error:', error);
-    
-    // Clean up uploaded files on error
-    if (req.files) {
-      for (const file of req.files) {
-        try {
-          await fs.unlink(file.path);
-        } catch (unlinkError) {
-          console.error('Error deleting file:', unlinkError);
-        }
+
+    for (const fileUrl of uploadedFileUrls) {
+      try {
+        await removeStorageObjectByUrl(supabaseAdmin, fileUrl);
+      } catch (cleanupError) {
+        console.error('Error deleting uploaded deadline file:', cleanupError.message || cleanupError);
       }
     }
-    
+
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
@@ -461,12 +445,17 @@ router.delete('/:deadlineId', verifyToken, async (req, res) => {
       return res.status(403).json({ message: 'Deadline not found or unauthorized' });
     }
 
-    // Delete files from disk
-    const deadlineDir = path.join(__dirname, '../uploads/deadline-files', `class-${deadline.class_id}`, `deadline-${deadlineId}`);
-    try {
-      await fs.rm(deadlineDir, { recursive: true, force: true });
-    } catch (fsError) {
-      console.error('Warning: Could not delete files:', fsError);
+    const { data: attachedFiles } = await supabase
+      .from('deadline_files')
+      .select('file_path')
+      .eq('deadline_id', deadlineId);
+
+    for (const file of attachedFiles || []) {
+      try {
+        await removeStorageObjectByUrl(supabaseAdmin, file.file_path);
+      } catch (storageError) {
+        console.warn('Warning: Could not delete deadline file from storage:', storageError.message || storageError);
+      }
     }
 
     // Delete from database (cascade will handle related records)
@@ -512,12 +501,10 @@ router.delete('/file/:fileId', verifyToken, async (req, res) => {
     }
 
     if (fileRecord.file_path) {
-      const relativePath = fileRecord.file_path.replace(/^\/+/, '');
-      const diskPath = path.join(__dirname, '..', relativePath);
       try {
-        await fs.unlink(diskPath);
-      } catch (unlinkError) {
-        console.error('Warning: could not remove attachment from disk:', unlinkError.message);
+        await removeStorageObjectByUrl(supabaseAdmin, fileRecord.file_path);
+      } catch (storageError) {
+        console.error('Warning: could not remove attachment from storage:', storageError.message || storageError);
       }
     }
 

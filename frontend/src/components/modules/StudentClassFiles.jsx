@@ -1,10 +1,10 @@
 ﻿import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fileAPI, deadlineAPI } from '../../services/api';
+import { API_ORIGIN, fileAPI, deadlineAPI } from '../../services/api';
 import FileDetailModal from '../teacher-modules/FileDetailModal';
 import { filterArchivedMaterials, onArchiveChange } from '../../services/archive';
 
-const API_BASE = 'http://localhost:5000';
+const API_BASE = API_ORIGIN;
 
 function StudentClassFiles() {
   const { classId } = useParams();

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { deadlineAPI, fileAPI } from '../services/api';
+import { API_URL, deadlineAPI, fileAPI } from '../services/api';
 import { getArchivedMaterials, onArchiveChange, syncArchiveFromServer, unarchiveMaterial } from '../services/archive';
 import axios from 'axios';
 
@@ -51,7 +51,7 @@ const ArchiveDashboard = () => {
       if (user?.role === 'teacher') {
         if (item.source_type === 'class') {
           const token = localStorage.getItem('token');
-          await axios.delete(`http://localhost:5000/api/classes/${item.source_id}`, {
+          await axios.delete(`${API_URL}/classes/${item.source_id}`, {
             headers: { Authorization: `Bearer ${token}` }
           });
         } else if (item.source_type === 'deadline') {

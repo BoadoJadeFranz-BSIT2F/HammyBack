@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../services/api';
 import './ForgotPassword.css';
 
 const ResetPassword = () => {
@@ -24,7 +25,7 @@ const ResetPassword = () => {
       }
 
       try {
-        await axios.get(`http://localhost:5000/api/password/verify-reset-token/${token}`);
+        await axios.get(`${API_URL}/password/verify-reset-token/${token}`);
         setTokenValid(true);
       } catch (error) {
         setMessage({ 
@@ -61,7 +62,7 @@ const ResetPassword = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/password/reset-password', {
+      const response = await axios.post(`${API_URL}/password/reset-password`, {
         token,
         newPassword: password
       });

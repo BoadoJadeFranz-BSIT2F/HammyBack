@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
+import { API_URL } from '../services/api';
 import LogoutConfirmModal from './LogoutConfirmModal';
 import './Profile.css';
 
@@ -57,7 +58,7 @@ const Profile = () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(
-        'http://localhost:5000/api/password/change-password',
+        `${API_URL}/password/change-password`,
         {
           currentPassword: isGoogleUser ? undefined : currentPassword,
           newPassword

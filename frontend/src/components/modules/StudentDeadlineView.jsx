@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { deadlineAPI, submissionAPI } from '../../services/api';
+import { buildAbsoluteUrl, deadlineAPI, submissionAPI } from '../../services/api';
 import { isMaterialArchived, onArchiveChange } from '../../services/archive';
 import '../modules/Module.css';
 
@@ -224,7 +224,7 @@ const StudentDeadlineView = ({ deadline, onClose, onSubmitted }) => {
                   {currentDeadline.files.filter((f) => !isMaterialArchived({ source_type: 'deadline_attachment', source_id: f.id })).map((file) => (
                     <a
                       key={file.id}
-                      href={`http://localhost:5000${file.file_path}`}
+                      href={buildAbsoluteUrl(file.file_path)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="file-chip"
@@ -251,7 +251,7 @@ const StudentDeadlineView = ({ deadline, onClose, onSubmitted }) => {
                       {submission.files.map((file) => (
                         <a
                           key={file.id}
-                          href={`http://localhost:5000${file.file_path}`}
+                          href={buildAbsoluteUrl(file.file_path)}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="file-card-mini"
@@ -289,7 +289,7 @@ const StudentDeadlineView = ({ deadline, onClose, onSubmitted }) => {
                       {submission.files.map((file) => (
                         <a
                           key={file.id}
-                          href={`http://localhost:5000${file.file_path}`}
+                          href={buildAbsoluteUrl(file.file_path)}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="file-card-mini"
