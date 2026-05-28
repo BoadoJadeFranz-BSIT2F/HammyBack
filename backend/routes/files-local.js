@@ -1,7 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
-const supabase = require('../config/supabase');
+const { supabase, supabaseAdmin } = require('../config/supabase');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
@@ -17,18 +17,8 @@ if (!fs.existsSync(tempDir)) {
   fs.mkdirSync(tempDir, { recursive: true });
 }
 
-// Configure multer for local disk storage
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    // Save to temp directory first (classId not available yet in multipart parsing)
-    cb(null, tempDir);
-  },
-  filename: function (req, file, cb) {
-    const uniqueName = `${Date.now()}-${file.originalname}`;
-    cb(null, uniqueName);
-  }
-});
-
+// Use memory storage so we can stream directly to Supabase Storage
+const storage = multer.memoryStorage();
 const upload = multer({
   storage: storage,
   limits: { fileSize: 50 * 1024 * 1024 }, // 50MB
@@ -50,22 +40,9 @@ const verifyToken = (req, res, next) => {
 // ==================== LOCAL FILE STORAGE (NO SUPABASE STORAGE) ====================
 
 router.post('/upload', verifyToken, upload.single('file'), async (req, res) => {
-  let newFilePath = null; // Track moved file path for cleanup
-  
   try {
     const { classId, title, description } = req.body;
     const file = req.file;
-
-    console.log('=== FILE UPLOAD START ===');
-    console.log('User ID:', req.user.id);
-    console.log('Class ID:', classId);
-    console.log('File object:', file ? {
-      filename: file.filename,
-      originalname: file.originalname,
-      mimetype: file.mimetype,
-      size: file.size,
-      path: file.path
-    } : 'NO FILE');
 
     if (!file) return res.status(400).json({ message: 'No file provided' });
     if (!classId || !title) return res.status(400).json({ message: 'Class ID and title required' });
@@ -81,36 +58,32 @@ router.post('/upload', verifyToken, upload.single('file'), async (req, res) => {
       .single();
     
     if (!classData) {
-      // Delete uploaded file
-      fs.unlinkSync(file.path);
       return res.status(404).json({ message: 'Class not found' });
     }
     
     if (classData.teacher_id !== req.user.id) {
-      // Delete uploaded file
-      fs.unlinkSync(file.path);
       return res.status(403).json({ message: 'Not authorized' });
     }
 
-    console.log('Permission check passed');
+    // Upload to Supabase Storage
+    const bucket = process.env.SUPABASE_STORAGE_BUCKET || 'uploads';
+    const filePath = `class-${classIdNum}/${Date.now()}-${file.originalname}`;
 
-    // Move file from temp to correct class directory
-    const classDir = path.join(uploadsDir, `class-${classIdNum}`);
-    if (!fs.existsSync(classDir)) {
-      fs.mkdirSync(classDir, { recursive: true });
+    const uploadResult = await supabaseAdmin.storage.from(bucket).upload(filePath, file.buffer, {
+      contentType: file.mimetype,
+      upsert: false
+    });
+
+    if (uploadResult.error) {
+      console.error('Storage upload error:', uploadResult.error);
+      return res.status(500).json({ message: 'Failed to upload file', error: uploadResult.error.message });
     }
-    
-    newFilePath = path.join(classDir, file.filename);
-    fs.renameSync(file.path, newFilePath);
-    console.log('File moved from:', file.path);
-    console.log('File moved to:', newFilePath);
 
-    // Create file URL (accessible via /uploads route)
-    const fileUrl = `${process.env.BACKEND_URL || 'http://localhost:5000'}/uploads/class-${classIdNum}/${file.filename}`;
-    console.log('Generated file URL:', fileUrl);
-    console.log('File exists at new location:', fs.existsSync(newFilePath));
+    // Get public URL
+    const { data: urlData } = supabaseAdmin.storage.from(bucket).getPublicUrl(filePath);
+    const fileUrl = urlData?.publicUrl || '';
 
-    // Save to database (no RLS issues with direct INSERT)
+    // Save to database
     const { data: fileRecord, error: dbError } = await supabase
       .from('class_files')
       .insert({
@@ -128,31 +101,18 @@ router.post('/upload', verifyToken, upload.single('file'), async (req, res) => {
 
     if (dbError) {
       console.error('Database error:', JSON.stringify(dbError, null, 2));
-      // Delete uploaded file from new location
-      if (fs.existsSync(newFilePath)) {
-        fs.unlinkSync(newFilePath);
-      }
+      // Try to delete uploaded file from storage
+      await supabaseAdmin.storage.from(bucket).remove([filePath]);
       return res.status(500).json({ 
         message: 'Database error', 
         error: dbError.message 
       });
     }
 
-    console.log('File record saved:', fileRecord.id);
-    console.log('=== UPLOAD COMPLETE ===');
-
     res.status(201).json({ message: 'File uploaded successfully', file: fileRecord });
 
   } catch (error) {
     console.error('Upload exception:', error);
-    // Clean up file - check both temp and final locations
-    if (newFilePath && fs.existsSync(newFilePath)) {
-      fs.unlinkSync(newFilePath);
-      console.log('Cleaned up file from:', newFilePath);
-    } else if (req.file?.path && fs.existsSync(req.file.path)) {
-      fs.unlinkSync(req.file.path);
-      console.log('Cleaned up file from temp:', req.file.path);
-    }
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
@@ -316,14 +276,28 @@ router.delete('/:fileId', verifyToken, async (req, res) => {
       return res.status(403).json({ message: 'Not authorized' });
     }
 
-    // Extract file path from URL
-    const url = new URL(fileData.file_url);
-    const filePath = path.join(uploadsDir, url.pathname.replace('/uploads/', ''));
+    const bucket = process.env.SUPABASE_STORAGE_BUCKET || 'uploads';
 
-    // Delete file from disk
-    if (fs.existsSync(filePath)) {
-      fs.unlinkSync(filePath);
-      console.log('File deleted from disk:', filePath);
+    // Try to extract storage path from file_url (assumes publicUrl points to /storage/v1/...) or store path in DB separately
+    let storagePath = null;
+    try {
+      const url = new URL(fileData.file_url);
+      const pathname = url.pathname || '';
+      // Attempt to parse after /object/public/ or last slash
+      const parts = pathname.split('/');
+      storagePath = decodeURIComponent(parts.slice(-2).join('/'));
+    } catch (e) {
+      storagePath = null;
+    }
+
+    // Delete from storage if possible
+    if (storagePath) {
+      try {
+        await supabaseAdmin.storage.from(bucket).remove([storagePath]);
+        console.log('Deleted from storage:', storagePath);
+      } catch (err) {
+        console.warn('Failed to delete from storage:', err.message || err);
+      }
     }
 
     // Delete from database
